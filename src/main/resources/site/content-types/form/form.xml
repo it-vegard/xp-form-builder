@@ -1,0 +1,53 @@
+<content-type>
+  <display-name>Form</display-name>
+  <content-display-name-script>$('meta.label')</content-display-name-script>
+  <super-type>base:structured</super-type>
+  <is-abstract>false</is-abstract>
+  <is-final>true</is-final>
+  <allow-child-content>true</allow-child-content>
+  <form>
+    <input type="TextLine" name="id">
+      <label>ID</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="title">
+      <label>Title</label>
+      <occurrences minimum="1" maximum="1"/>
+    </input>
+    <input type="TextLine" name="actionUrl">
+      <label>Action URL</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="TextLine" name="method">
+      <label>Submit method</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="CheckBox" name="useAjax">
+      <label>Ajax submit</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input type="ComboBox" name="style">
+      <label>Style</label>
+      <occurrences minimum="1" maximum="1"/>
+      <config>
+        <option value="default">Browser default</option>
+        <option value="xp-formbuilder">XP Formbuilder</option>
+        <option value="bootstrap">Twitter Bootstrap</option>
+      </config>
+    </input>
+    <item-set name="columns">
+      <label>Columns</label>
+      <items>
+        <input name="inputs" type="ContentSelector">
+          <label>Inputs</label>
+          <occurrences minimum="1" maximum="0"/>
+          <config>
+            <relationship-type>system:reference</relationship-type>
+          </config>
+        </input>
+      </items>
+      <immutable>false</immutable>
+      <occurrences minimum="1" maximum="0"/>
+    </item-set>
+  </form>
+</content-type>

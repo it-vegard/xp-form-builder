@@ -1,0 +1,19 @@
+<content-type>
+  <display-name>Input: Search</display-name>
+  <content-display-name-script>$('label')</content-display-name-script>
+  <super-type>base:structured</super-type>
+  <is-abstract>false</is-abstract>
+  <is-final>true</is-final>
+  <allow-child-content>true</allow-child-content>
+  <form>
+    <field-set name="input">
+      <label>Input</label>
+      <items>
+        <inline mixin="input-mixin"/>
+        <inline mixin="attr-placeholder"/>
+        <inline mixin="attr-pattern"/>
+        <inline mixin="attr-datalist"/>
+      </items>
+    </field-set>
+  </form>
+</content-type>

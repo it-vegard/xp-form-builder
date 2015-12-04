@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Pattern</display-name>
+  <items>
+    <input name="pattern" type="TextLine">
+      <label>Pattern (regex)</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

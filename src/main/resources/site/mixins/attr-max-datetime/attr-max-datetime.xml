@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Max (datetime)</display-name>
+  <items>
+    <input name="max" type="DateTime">
+      <label>Maximum date and time</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

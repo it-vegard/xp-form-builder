@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Minlength</display-name>
+  <items>
+    <input name="minlength" type="Long">
+      <label>Minimum lenght</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

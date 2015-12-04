@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Step</display-name>
+  <items>
+    <input name="step" type="Double">
+      <label>Step</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

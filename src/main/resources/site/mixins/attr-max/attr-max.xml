@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Max (double)</display-name>
+  <items>
+    <input name="max" type="Double">
+      <label>Maximum value</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

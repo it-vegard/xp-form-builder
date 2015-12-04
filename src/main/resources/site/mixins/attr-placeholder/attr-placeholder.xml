@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Placeholder</display-name>
+  <items>
+    <input name="placeholder" type="TextLine">
+      <label>Placeholder</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Value (date)</display-name>
+  <items>
+    <input name="value" type="Date">
+      <label>Default value</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

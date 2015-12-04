@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Accept</display-name>
+  <items>
+    <input name="accept" type="TextLine">
+      <label>Accepted file types</label>
+      <occurrences minimum="0" maximum="0"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

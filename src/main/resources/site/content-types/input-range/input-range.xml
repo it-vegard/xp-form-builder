@@ -1,0 +1,21 @@
+<content-type>
+  <display-name>Input: Range</display-name>
+  <content-display-name-script>$('label')</content-display-name-script>
+  <super-type>base:structured</super-type>
+  <is-abstract>false</is-abstract>
+  <is-final>true</is-final>
+  <allow-child-content>true</allow-child-content>
+  <form>
+    <field-set name="input">
+      <label>Input</label>
+      <items>
+        <inline mixin="input-mixin"/>
+        <inline mixin="attr-min"/>
+        <inline mixin="attr-max"/>
+        <inline mixin="attr-value"/>
+        <inline mixin="attr-step"/>
+        <inline mixin="attr-ticks"/>
+      </items>
+    </field-set>
+  </form>
+</content-type>

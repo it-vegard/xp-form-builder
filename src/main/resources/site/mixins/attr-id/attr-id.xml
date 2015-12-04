@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Id</display-name>
+  <items>
+    <input name="id" type="TextLine">
+      <label>Id</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Name</display-name>
+  <items>
+    <input name="name" type="TextLine">
+      <label>Name</label>
+      <occurrences minimum="1" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

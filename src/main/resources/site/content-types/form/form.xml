@@ -43,6 +43,20 @@
           <occurrences minimum="1" maximum="0"/>
           <config>
             <relationship-type>system:reference</relationship-type>
+            <allow-content-type>input-checkbox</allow-content-type>
+            <allow-content-type>input-color</allow-content-type>
+            <allow-content-type>input-date</allow-content-type>
+            <allow-content-type>input-datetime-local</allow-content-type>
+            <allow-content-type>input-email</allow-content-type>
+            <allow-content-type>input-number</allow-content-type>
+            <allow-content-type>input-password</allow-content-type>
+            <allow-content-type>input-radio</allow-content-type>
+            <allow-content-type>input-range</allow-content-type>
+            <allow-content-type>input-search</allow-content-type>
+            <allow-content-type>input-tel</allow-content-type>
+            <allow-content-type>input-text</allow-content-type>
+            <allow-content-type>input-time</allow-content-type>
+            <allow-content-type>input-url</allow-content-type>
           </config>
         </input>
       </items>

@@ -18,6 +18,14 @@
       <label>Action URL</label>
       <occurrences minimum="0" maximum="1"/>
     </input>
+    <input type="ContentSelector" name="responseFolder">
+      <label>Folder to store responses</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config>
+        <relationship-type>system:reference</relationship-type>
+        <allow-content-type>base:folder</allow-content-type>
+      </config>
+    </input>
     <input type="TextLine" name="method">
       <label>Submit method</label>
       <occurrences minimum="0" maximum="1"/>

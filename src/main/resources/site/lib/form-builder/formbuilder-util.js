@@ -143,7 +143,7 @@ var initEmailInput = function(input, inputContent) {
 
 /* File input */
 var initFileInput = function(input, inputContent) {
-  if (inputContent.accept.length !== 0) {
+  if (inputContent.accept && inputContent.accept.length !== 0) {
     input.accept = "";
     LIST_UTIL.iterateSafely(inputContent.accept, function(acceptedFormat) {
       if (input.accept !== "") input.accept += ";";

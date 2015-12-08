@@ -12,6 +12,7 @@
         <inline mixin="attr-id"/>
         <inline mixin="attr-name"/>
         <inline mixin="attr-value"/>
+        <inline mixin="attr-class"/>
       </items>
     </field-set>
   </form>

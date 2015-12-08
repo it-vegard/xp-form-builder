@@ -1,0 +1,10 @@
+<mixin>
+  <display-name>Attr: Class</display-name>
+  <items>
+    <input name="class" type="TextLine">
+      <label>Class</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
+  </items>
+</mixin>

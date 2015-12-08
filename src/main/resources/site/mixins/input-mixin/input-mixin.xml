@@ -21,6 +21,11 @@
       <occurrences minimum="0" maximum="1"/>
       <config/>
     </input>
+    <input name="class" type="TextLine">
+      <label>Class</label>
+      <occurrences minimum="0" maximum="1"/>
+      <config/>
+    </input>
     <input name="help" type="HtmlArea">
       <label>Help-text</label>
       <occurrences minimum="0" maximum="1"/>

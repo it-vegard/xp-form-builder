@@ -1,10 +1,9 @@
 <form data-th-id="${form.id}" id="my-form" data-th-action="${form.actionUrl}" action="#" data-th-method="${form.method}" method="post">
   <h2 data-th-text="${form.title}">Form-part</h2>
   <div data-th-each="column : ${form.columns}" class="column">
-    <div data-th-each="input : ${column.inputs}" data-th-remove="tag">
+    <div data-th-each="input : ${column.inputs}" class="xp-form-input">
       <label data-th-for="${input.id}" for="input-id">
         <span data-th-text="${input.label}" data-th-remove="tag">Label</span>
-        <!-- <p data-th-text="${input}">Input data</p> -->
         <div data-th-switch="${input.type}" data-th-remove="tag">
           <div data-th-case="radio" data-th-remove="tag">
             <div data-th-each="option : ${input.options}">

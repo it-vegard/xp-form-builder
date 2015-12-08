@@ -40,6 +40,7 @@
                 <allow-content-type>input-date</allow-content-type>
                 <allow-content-type>input-datetime-local</allow-content-type>
                 <allow-content-type>input-email</allow-content-type>
+                <allow-content-type>input-file</allow-content-type>
                 <allow-content-type>input-number</allow-content-type>
                 <allow-content-type>input-password</allow-content-type>
                 <allow-content-type>input-radio</allow-content-type>

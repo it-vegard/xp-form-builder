@@ -35,6 +35,7 @@ var addCommonInputValues = function(input, inputContent) {
   input.label = inputContent.label; // required
   input.title = inputContent.title;
   input.help = inputContent.help;
+  input.class = inputContent.class;
   input.required = inputContent.required || false;
 };
 
@@ -101,10 +102,12 @@ var initButtonInput = function(input, inputContent) {
 /* Checkbox input */
 var initCheckboxInput = function(input, inputContent) {
   if (inputContent.state === "checked") {
-    input.checked = "checked";
+    input.checked = (input.class) ? "checked" : input.class + " checked";
   } else if (inputContent.state === "indeterminate") {
-    input.class = "indeterminate";
+    input.class = (input.class) ? input.class + " indeterminate" : "indeterminate";
   }
+  input.value = inputContent.value;
+  input.text = inputContent.text;
 };
 
 /* Color input */

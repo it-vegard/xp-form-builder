@@ -10,6 +10,8 @@
       <label>Input</label>
       <items>
         <inline mixin="input-mixin"/>
+        <inline mixin="attr-value"/>
+        <inline mixin="attr-text"/>
         <inline mixin="attr-state"/>
       </items>
     </field-set>

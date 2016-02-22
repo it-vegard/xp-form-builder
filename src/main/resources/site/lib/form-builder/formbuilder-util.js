@@ -29,6 +29,9 @@ exports.initForm = function (formConfig) {
   return form;
 };
 
+exports.receiveForm = function(request) {
+};
+
 var addCommonInputValues = function(input, inputContent) {
   input.id = inputContent.id || inputContent.name;
   input.name = inputContent.name; // required
@@ -116,12 +119,6 @@ var initColorInput = function(input, inputContent) {
   var colorOptions = LIST_UTIL.asList(inputContent.colorOptions);
   input.placeholder = colorOptions[0] || "#000000";
   addDatalist(input, inputContent);
-  /*if (colorOptions.length > 0) {
-    input.datalist = {
-      id: input.id + "-datalist",
-      options: colorOptions
-    };
-  }*/
 };
 
 /* Date input */

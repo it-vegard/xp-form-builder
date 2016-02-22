@@ -27,7 +27,7 @@ exports.get = function(req) {
     var model = {
         site: site,
         content: formResponse
-    }
+    };
 
     // Specify the view file to use
     var view = resolve('form-response.html');
@@ -38,5 +38,5 @@ exports.get = function(req) {
     // Return the response object
     return {
         body: body
-    }
+    };
 };

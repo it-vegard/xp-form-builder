@@ -20,7 +20,7 @@ var styleConfig = {
         styleTag: "",
         view: "/views/default/form.html"
     }
-}
+};
 
 // Handle the GET request
 exports.get = function(req) {
@@ -53,7 +53,7 @@ exports.get = function(req) {
             headBegin: styleConfig[contentData.style].styleTag,
             headEnd: "<script type='text/javascript' src='" + formScript + "'></script>"
         }
-    }
+    };
 };
 
 exports.post = function(req) {
@@ -95,5 +95,5 @@ exports.post = function(req) {
             formConfig: formConfig,
             component: component
         }
-    }
+    };
 };

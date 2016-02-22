@@ -18,7 +18,6 @@ var asList = function(listOrObject) {
   } else if (Object.prototype.toString.call(listOrObject) === '[object Object]') {
     return [listOrObject];
   } else {
-    log.info(Object.prototype.toString.call(listOrObject));
     return [listOrObject];
   }
 };
@@ -29,12 +28,11 @@ var iterateSafely = function(listOrObject, handler) {
     handler(list[i]);
   }
 };
+
 var iterateProperties = function(object, handler) {
   for (var property in object) {
     if (object.hasOwnProperty(property)) {
       handler(property);
-    } else {
-      log.info("Object is a native property");
     }
   }
 };

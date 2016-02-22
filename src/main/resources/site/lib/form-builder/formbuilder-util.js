@@ -10,15 +10,18 @@ exports.initForm = function (formConfig) {
     actionUrl: formConfig.actionUrl || portal.componentUrl({}),
     method: formConfig.method || "post",
     columns: []
-  }
+  };
   LIST_UTIL.iterateSafely(formConfig.columns, function(column) {
       var inputList = [];
       LIST_UTIL.iterateSafely(column.inputs, function(inputId) {
         var inputContent = contentLib.get({key: inputId});
         if (inputContent !== null) {
           var input = {};
+          inputContent.data.name = formatName(inputContent.data.name);
           addCommonInputValues(input, inputContent.data);
           addCustomInputValues(input, inputContent.type, inputContent.data);
+          input.class = (input.class) ? input.class + " xp-input" : "xp-input";
+          input.class.trim();
           inputList.push(input);
         } else {
           log.error("Could not retrieve input element with ID '" + inputId + "'.");
@@ -290,6 +293,10 @@ var getInputType = function (contentType) {
 var formatDate = function(date) {
   var dateParts = date.split('-');
   return dateParts[2] + "." + dateParts[1] + "." + dateParts[0];
+};
+
+var formatName = function(name) {
+  return name.replace('-', '_');
 };
 
 var supportsCapture = function(accept) {

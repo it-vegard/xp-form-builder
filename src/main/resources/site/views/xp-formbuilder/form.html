@@ -1,4 +1,4 @@
-<form data-th-id="${form.id}" id="my-form" data-th-class="${(form.ajax == true) ? 'ajax-submit ' : ''} + 'xp-formbuilder-form'" data-th-action="${form.actionUrl}" action="#" data-th-method="${form.method}" method="post">
+<form data-th-id="${form.id}" id="my-form" data-th-class="${(form.ajax == true) ? 'ajax-submit ' : ''} + 'xp-formbuilder-form'" data-th-action="${form.actionUrl}" action="#" data-th-method="${form.method}" method="post" data-th-enctype="${form.enctype}">
   <h2 data-th-text="${form.title}">Form-part</h2>
   <div data-th-each="column : ${form.columns}" class="column">
     <div data-th-each="input : ${column.inputs}" data-th-remove="tag">

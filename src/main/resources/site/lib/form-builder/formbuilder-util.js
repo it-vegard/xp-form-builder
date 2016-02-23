@@ -26,6 +26,7 @@ exports.initForm = function (formConfig) {
           input.class = (input.class) ? input.class + " xp-input" : "xp-input";
           input.class.trim();
           inputList.push(input);
+          if (getInputType(inputContent.type) === "file") form.enctype = "multipart/form-data";
         } else {
           log.error("Could not retrieve input element with ID '" + inputId + "'.");
         }
@@ -36,11 +37,11 @@ exports.initForm = function (formConfig) {
 };
 
 exports.receiveForm = function(request) {
-  var multiPartForm = portal.getMultipartForm();
   var form = request.params;
   var formConfig = portal.getComponent().config;
   form.displayName = formConfig.title || "form-response";
   var attachments = [];
+  var multiPartForm = portal.getMultipartForm();
   if (multiPartForm) {
     attachments = saveAttachments(multiPartForm);
     for (var i = 0; i < attachments.length; i++) {

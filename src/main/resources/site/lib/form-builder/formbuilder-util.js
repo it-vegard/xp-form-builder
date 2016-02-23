@@ -1,7 +1,9 @@
 var portal = require('/lib/xp/portal'); // Import the portal functions
 var contentLib = require('/lib/xp/content'); // Import the portal functions
+var auth = require('/lib/xp/auth'); // Import the content library
 
 var LIST_UTIL = require('/lib/form-builder/list-util');
+var moment = require('/lib/moment.min.js'); // Import Moment.js
 
 exports.initForm = function (formConfig) {
   var form = {
@@ -9,6 +11,7 @@ exports.initForm = function (formConfig) {
     title: formConfig.title || null,
     actionUrl: formConfig.actionUrl || portal.componentUrl({}),
     method: formConfig.method || "post",
+    ajax: formConfig.useAjax || false,
     columns: []
   };
   LIST_UTIL.iterateSafely(formConfig.columns, function(column) {
@@ -33,6 +36,46 @@ exports.initForm = function (formConfig) {
 };
 
 exports.receiveForm = function(request) {
+  var form = request.params;
+  var formConfig = portal.getComponent().config;
+  form.displayName = formConfig.title || "form-response";
+  var response = saveForm(form);
+  return {
+    body: formConfig.response
+  };
+};
+
+var saveForm = function(form) {
+  var responseFolder = getResponseFolder();
+  var timestamp = moment().format('YYYY-MM-DDTHH:mm:ss');
+  var name = timestamp + "-" + auth.getUser().login;
+  var displayName = timestamp + ": " + auth.getUser().login;
+  var response = contentLib.create({
+      name: name,
+      parentPath: responseFolder,
+      displayName: form.displayName,
+      requireValid: true,
+      contentType: 'base:unstructured',
+      branch: 'draft',
+      language: 'no',
+      data: form
+  });
+  log.info("Stored form response. Response key: %s", response._id);
+  return {
+      body: response
+  };
+};
+
+var getResponseFolder = function() {
+  try {
+    var component = portal.getComponent();
+    var formConfig = component["config"];
+    var responseFolderKey = formConfig["responseFolder"];
+    var responseFolder = contentLib.get({key: responseFolderKey});
+    return responseFolder._path;
+  } catch (exception) {
+    log.error("Could not resolve folder to store form responses in.", exception);
+  }
 };
 
 var addCommonInputValues = function(input, inputContent) {

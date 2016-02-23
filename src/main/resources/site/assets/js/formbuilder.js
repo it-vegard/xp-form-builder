@@ -3,13 +3,10 @@
 var XP_LIST_UTIL = {
   asList:  function(listOrObject) {
     if (Object.prototype.toString.call(listOrObject) === '[object Array]') {
-      console.log("Is an array");
       return listOrObject;
     } else if (listOrObject !== undefined) {
-      console.log("Is an object");
       return [listOrObject];
     } else {
-      console.log("Is undefined");
       return [];
     }
   },

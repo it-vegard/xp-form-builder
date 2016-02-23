@@ -21,10 +21,10 @@ apply plugin: 'com.enonic.xp.app'
 version = '1.0.0-SNAPSHOT'
 
 app {
-    name = 'no.itera.xp.formbuilder'
-    displayName = 'Itera Form Builder'
-    vendorName = 'Itera Norge AS'
-    vendorUrl = 'http://www.itera.no'
+    name = 'no.vegard.it.xp.formbuilder'
+    displayName = 'Enonic XP Form Builder by Vegard Haugstvedt'
+    vendorName = 'Vegard Haugstvedt'
+    vendorUrl = 'http://www.github.com/it-vegard'
 }
 
 lessc {

@@ -10,7 +10,12 @@
         <tr data-th-each="field : ${content.fields}">
           <th style="text-align: left; font-weight: bold; text-transform: capitalize; padding: 10px 20px; line-height: 2em; border: 1px solid #000; border-collapse: collapse;" data-th-text="${field.name}">Label</th>
           <td style="padding: 10px 20px; border: 1px solid #000; border-collapse: collapse;">
-            <div data-th-text="${field.value}">Label</div>
+            <div data-th-if="${!field.attachments}" data-th-text="${field.value}" data-th-remove="tag">Label</div>
+            <ul data-th-if="${field.attachments}" style="padding-left: 0;">
+              <li data-th-each="attachment : ${field.attachments}" style="list-style-type: none; margin-bottom: 10px;">
+                <a href="#" data-th-href="${portal.attachmentUrl({'_id=' + attachment.id,'_download=true'})}" data-th-text="${attachment.name}"></a>
+              </li>
+            </ul>
           </td>
         </tr>
       </table>

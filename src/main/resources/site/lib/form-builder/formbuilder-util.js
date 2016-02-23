@@ -36,9 +36,22 @@ exports.initForm = function (formConfig) {
 };
 
 exports.receiveForm = function(request) {
+  var multiPartForm = portal.getMultipartForm();
   var form = request.params;
   var formConfig = portal.getComponent().config;
   form.displayName = formConfig.title || "form-response";
+  var attachments = [];
+  if (multiPartForm) {
+    attachments = saveAttachments(multiPartForm);
+    for (var i = 0; i < attachments.length; i++) {
+      var attachment = attachments[i];
+      if (!form[attachment.inputId]) form[attachment.inputId] = { attachments: [] }; 
+      form[attachment.inputId].attachments.push({
+        id: attachment.id,
+        name: attachment.name
+      });
+    }
+  }
   var response = saveForm(form);
   return {
     body: formConfig.response
@@ -63,6 +76,71 @@ var saveForm = function(form) {
   log.info("Stored form response. Response key: %s", response._id);
   return {
       body: response
+  };
+};
+
+var saveAttachments = function(form) {
+  var responseFolder = getResponseFolder();
+  var attachmentsFolder = getAttachmentFolderOrCreateNew(responseFolder);
+  var files = getFilesFromForm(form);
+  var savedFiles = [];
+  for (var index = 0; index < files.length; index++) {
+    var savedFile = saveFile(files[index], attachmentsFolder);
+    savedFiles.push(savedFile);
+  }
+  return savedFiles;
+};
+
+var getAttachmentFolderOrCreateNew = function(parentFolder) {
+  try {
+    var attachmentsFolder = contentLib.create({
+      name: '_attachments',
+      parentPath: parentFolder,
+      displayName: '_attachments',
+      draft: true,
+      contentType: 'base:folder',
+      data: {}
+    });
+    return attachmentsFolder._path;
+  } catch (exception) {
+    if (exception.code === 'contentAlreadyExists') {
+      return parentFolder + "/_attachments";
+    }  else {
+      log.info("Unexpected error when creating attachments-folder in path '%s': %s", parentFolder, exception);
+      return parentFolder;
+    }
+  }
+};
+
+var getFilesFromForm = function(form) {
+  var files = [];
+  for (var inputName in form) {
+    var input = form[inputName];
+    if (inputIsFile(input)) {
+      files.push(input);
+    }
+  }
+  return files;
+};
+
+var inputIsFile = function(input) {
+  return (input["fileName"] !== undefined && input["contentType"] !== undefined);
+};
+
+var saveFile = function(file, folder) {
+  var stream = portal.getMultipartStream(file.name);
+  var result = contentLib.createMedia({
+    name: file.fileName,
+    parentPath: folder,
+    mimeType: file.contentType,
+    data: stream
+  });
+  return {
+    id: result._id,
+    inputId: file.name.split("[")[0],
+    name: result._name,
+    displayName: result.displayName,
+    type: result.type
   };
 };
 

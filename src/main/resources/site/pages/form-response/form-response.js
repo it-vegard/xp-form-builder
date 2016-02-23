@@ -18,7 +18,8 @@ exports.get = function(req) {
     for (var field in content.data) {
         formResponse.fields.push({
             name: field,
-            value: content.data[field]
+            value: content.data[field],
+            attachments: content.data[field].attachments
         });
     }
     formResponse.displayName = content.displayName;

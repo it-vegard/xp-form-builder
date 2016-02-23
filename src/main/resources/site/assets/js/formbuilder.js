@@ -62,6 +62,9 @@ var XP_FORM_BUILDER = {
     let formData = new FormData();
     for (let i = 0; i < inputFields.length; i++) {
       let inputField = inputFields[i];
+      if (inputField.type === "file") {
+        XP_FORM_BUILDER.addFiles(inputField, formData);
+      } else 
       if (inputField.type === "radio" && inputField.checked !== true) {
         continue; // Don't add unchecked radiobuttons.
       } else if (inputField.type === undefined && inputField.for !== undefined && inputField.attributes.name.value) {
@@ -73,6 +76,14 @@ var XP_FORM_BUILDER = {
       }
     }
     return formData;
+  },
+  addFiles: function(inputField, formData) {
+    for (let i = 0; i < inputField.files.length; i++) {
+      let file = inputField.files[i];
+      if (XP_FORM_BUILDER.validateFile(file)) {
+        formData.append(inputField.id + "[" + i + "]", file, file.name);
+      }
+    }
   },
   sendForm: function(form, formData) {
     let xhr = new XMLHttpRequest();
@@ -86,6 +97,9 @@ var XP_FORM_BUILDER = {
       }
     };
     xhr.send(formData);
+  },
+  validateFile: function(file) {
+    return true;
   },
   addResponse: function(form, message) {
     let responseTag = document.createElement("p");

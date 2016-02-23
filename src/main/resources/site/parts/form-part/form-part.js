@@ -9,6 +9,10 @@ var styleConfig = {
         css: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
         view: "/views/bootstrap/form.html"
     },
+    "xp-formbuilder": {
+        css: "css/formbuilder.css",
+        view: "/views/xp-formbuilder/form.html"
+    },
     default: {
         css: "",
         view: "/views/default/form.html"
@@ -23,7 +27,7 @@ var createCssUrl = function(style) {
         return pathOrUrl; // Absolute URL. Doesn't need handling.
     } else {
         return portal.assetUrl({path: styleConfig[style].css});
-}
+    }
 };
 
 // Handle the GET request
@@ -57,8 +61,8 @@ exports.get = function(req) {
             headBegin: styleConfig[formConfig.style].css ? "<link rel='stylesheet' href='" + createCssUrl(formConfig.style) + "'/>" : "",
             headEnd: "<script type='text/javascript' src='" + formScript + "'></script>"
         }
+    };
 };
-            };
 
 exports.post = function(req) {
     return FORM_BUILDER.receiveForm(req);

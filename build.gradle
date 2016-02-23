@@ -2,6 +2,7 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter()
+        mavenCentral()
         maven {
             url 'http://repo.enonic.com/public'
         }
@@ -9,9 +10,12 @@ buildscript {
 
     dependencies {
         classpath 'com.enonic.xp:gradle-plugin:6.2.0'
+        classpath 'com.github.houbie:lesscss-gradle-plugin:1.0.3-less-1.7.0'
     }
 }
 
+
+apply plugin: 'lesscss'
 apply plugin: 'com.enonic.xp.app'
 
 version = '1.0.0-SNAPSHOT'
@@ -21,6 +25,14 @@ app {
     displayName = 'Itera Form Builder'
     vendorName = 'Itera Norge AS'
     vendorUrl = 'http://www.itera.no'
+}
+
+lessc {
+    sourceDir 'src/main/resources/site/assets/less'
+    include '*.less'
+    destinationDir = 'build/resources/main/site/assets/css'
+    options.strictMath = true
+    encoding = "utf-8"
 }
 
 ext {
@@ -46,3 +58,5 @@ repositories {
         url 'http://repo.enonic.com/public'
     }
 }
+
+jar.dependsOn += lessc

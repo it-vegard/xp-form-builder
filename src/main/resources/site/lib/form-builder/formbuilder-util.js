@@ -326,6 +326,7 @@ var initRangeInput = function(input, inputContent) {
   input.max = inputContent.max;
   input.value = inputContent.value;
   input.step = inputContent.step;
+  input.output = inputContent.name + "_output";
   var ticks = LIST_UTIL.asList(inputContent.ticks);
   if (ticks.length > 0) { // Prefer ticks as values
     input.datalist = {

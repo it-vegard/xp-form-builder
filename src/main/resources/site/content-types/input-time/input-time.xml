@@ -2,9 +2,6 @@
   <display-name>Input: Time</display-name>
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
-  <is-abstract>false</is-abstract>
-  <is-final>true</is-final>
-  <allow-child-content>true</allow-child-content>
   <form>
     <field-set name="input">
       <label>Input</label>

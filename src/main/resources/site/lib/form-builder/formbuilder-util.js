@@ -70,7 +70,6 @@ var saveForm = function(form, formConfig) {
       requireValid: true,
       contentType: 'base:unstructured',
       branch: 'draft',
-      language: 'no',
       data: form
   });
   log.info("Stored form response. Response key: %s", response._id);

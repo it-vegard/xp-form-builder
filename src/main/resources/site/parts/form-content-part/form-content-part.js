@@ -9,16 +9,27 @@ var FORM_BUILDER = require('/lib/form-builder/formbuilder-util');
 
 var styleConfig = {
     bootstrap: {
-        styleTag: "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'/>",
+        css: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
         view: "/views/bootstrap/form.html"
     },
     "xp-formbuilder": {
-        styleTag: "<link rel='stylesheet' href='css/xp-formbuilder.css'/>",
+        css: "css/formbuilder.css",
         view: "/views/xp-formbuilder/form.html"
     },
     default: {
-        styleTag: "",
+        css: "",
         view: "/views/default/form.html"
+    }
+};
+
+var createCssUrl = function(style) { 
+    var pathOrUrl = styleConfig[style].css;
+    if (pathOrUrl === undefined || pathOrUrl === null || pathOrUrl === "") {
+        return "";
+    } else if (pathOrUrl.contains("://")) {
+        return pathOrUrl; // Absolute URL. Doesn't need handling.
+    } else {
+        return portal.assetUrl({path: styleConfig[style].css});
     }
 };
 
@@ -50,49 +61,13 @@ exports.get = function(req) {
     return {
         body: thymeleaf.render(view, model),
         pageContributions: {
-            headBegin: styleConfig[contentData.style].styleTag,
+            headBegin: styleConfig[contentData.style].css ? "<link rel='stylesheet' href='" + createCssUrl(contentData.style) + "'/>" : "",
             headEnd: "<script type='text/javascript' src='" + formScript + "'></script>"
         }
     };
 };
 
 exports.post = function(req) {
-    var submittedForm = req.params;
-    log.info("Received the following form: %s ", submittedForm);
-    log.info("Not handling the submitted form any further. Please add a service and link to that with the action URL in the form in order to handle the form.");
-    
-    var component = portal.getComponent();
-    var formConfig = component["config"];
-    
-    if (formConfig.responseFolder) {
-        var content = contentLib.get({key: formConfig.responseFolder});
-        if (content) {
-            var parentPath = content._path;
-            var timestamp = moment().format('YYYY-MM-DDTHH:mm:ss.SSS');
-            var name = timestamp + "-" + auth.getUser().login;
-            var displayName = timestamp + ": " + auth.getUser().login;
-            submittedForm.displayName = displayName;
-            var response = contentLib.create({
-                name: name,
-                parentPath: parentPath,
-                displayName: displayName,
-                requireValid: true,
-                contentType: 'base:unstructured',
-                branch: 'draft',
-                data: submittedForm
-            });
-            return {
-                body: response
-            };
-        }
-    }
-
-    return {
-        body: {
-            parentPath: parentPath,
-            formResponse: submittedForm,
-            formConfig: formConfig,
-            component: component
-        }
-    };
+    var formConfig = portal.getContent().data;
+    return FORM_BUILDER.receiveForm(req, formConfig);
 };

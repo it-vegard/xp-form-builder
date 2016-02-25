@@ -65,5 +65,6 @@ exports.get = function(req) {
 };
 
 exports.post = function(req) {
-    return FORM_BUILDER.receiveForm(req);
+    var formConfig = portal.getComponent()["config"];
+    return FORM_BUILDER.receiveForm(req, formConfig);
 };

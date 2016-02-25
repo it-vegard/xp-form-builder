@@ -9,16 +9,27 @@ var FORM_BUILDER = require('/lib/form-builder/formbuilder-util');
 
 var styleConfig = {
     bootstrap: {
-        styleTag: "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'/>",
+        css: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
         view: "/views/bootstrap/form.html"
     },
     "xp-formbuilder": {
-        styleTag: "<link rel='stylesheet' href='css/xp-formbuilder.css'/>",
+        css: "css/formbuilder.css",
         view: "/views/xp-formbuilder/form.html"
     },
     default: {
-        styleTag: "",
+        css: "",
         view: "/views/default/form.html"
+    }
+};
+
+var createCssUrl = function(style) { 
+    var pathOrUrl = styleConfig[style].css;
+    if (pathOrUrl === undefined || pathOrUrl === null || pathOrUrl === "") {
+        return "";
+    } else if (pathOrUrl.contains("://")) {
+        return pathOrUrl; // Absolute URL. Doesn't need handling.
+    } else {
+        return portal.assetUrl({path: styleConfig[style].css});
     }
 };
 
@@ -50,7 +61,7 @@ exports.get = function(req) {
     return {
         body: thymeleaf.render(view, model),
         pageContributions: {
-            headBegin: styleConfig[contentData.style].styleTag,
+            headBegin: styleConfig[contentData.style].css ? "<link rel='stylesheet' href='" + createCssUrl(contentData.style) + "'/>" : "",
             headEnd: "<script type='text/javascript' src='" + formScript + "'></script>"
         }
     };

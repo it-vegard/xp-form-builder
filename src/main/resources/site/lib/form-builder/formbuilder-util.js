@@ -36,14 +36,13 @@ exports.initForm = function (formConfig) {
   return form;
 };
 
-exports.receiveForm = function(request) {
+exports.receiveForm = function(request, formConfig) {
   var form = request.params;
-  var formConfig = portal.getComponent().config;
   form.displayName = formConfig.title || "form-response";
   var attachments = [];
   var multiPartForm = portal.getMultipartForm();
   if (multiPartForm) {
-    attachments = saveAttachments(multiPartForm);
+    attachments = saveAttachments(multiPartForm, formConfig);
     for (var i = 0; i < attachments.length; i++) {
       var attachment = attachments[i];
       if (!form[attachment.inputId]) form[attachment.inputId] = { attachments: [] }; 
@@ -53,14 +52,14 @@ exports.receiveForm = function(request) {
       });
     }
   }
-  var response = saveForm(form);
+  var response = saveForm(form, formConfig);
   return {
     body: formConfig.response
   };
 };
 
-var saveForm = function(form) {
-  var responseFolder = getResponseFolder();
+var saveForm = function(form, formConfig) {
+  var responseFolder = getResponseFolder(formConfig);
   var timestamp = moment().format('YYYY-MM-DDTHH:mm:ss');
   var name = timestamp + "-" + auth.getUser().login;
   var displayName = timestamp + ": " + auth.getUser().login;
@@ -80,8 +79,8 @@ var saveForm = function(form) {
   };
 };
 
-var saveAttachments = function(form) {
-  var responseFolder = getResponseFolder();
+var saveAttachments = function(form, formConfig) {
+  var responseFolder = getResponseFolder(formConfig);
   var attachmentsFolder = getAttachmentFolderOrCreateNew(responseFolder);
   var files = getFilesFromForm(form);
   var savedFiles = [];
@@ -145,10 +144,8 @@ var saveFile = function(file, folder) {
   };
 };
 
-var getResponseFolder = function() {
+var getResponseFolder = function(formConfig) {
   try {
-    var component = portal.getComponent();
-    var formConfig = component["config"];
     var responseFolderKey = formConfig["responseFolder"];
     var responseFolder = contentLib.get({key: responseFolderKey});
     return responseFolder._path;

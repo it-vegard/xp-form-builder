@@ -24,9 +24,13 @@
             <allow-content-type>base:folder</allow-content-type>
           </config>
         </input>
-        <input type="TextLine" name="method">
+        <input type="ComboBox" name="method">
           <label>Submit method</label>
-          <occurrences minimum="0" maximum="1"/>
+          <occurrences minimum="1" maximum="1"/>
+          <config>
+            <option value="post">POST</option>
+            <option value="get">GET</option>
+          </config>
         </input>
         <input type="CheckBox" name="useAjax">
           <label>Ajax submit</label>

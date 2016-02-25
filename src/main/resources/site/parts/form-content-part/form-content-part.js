@@ -79,7 +79,6 @@ exports.post = function(req) {
                 requireValid: true,
                 contentType: 'base:unstructured',
                 branch: 'draft',
-                language: 'no',
                 data: submittedForm
             });
             return {

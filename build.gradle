@@ -9,20 +9,17 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.enonic.xp:gradle-plugin:6.3.0'
+        classpath "com.enonic.xp:gradle-plugin:${xpVersion}"
         classpath 'com.github.houbie:lesscss-gradle-plugin:1.0.3-less-1.7.0'
     }
 }
 
-
 apply plugin: 'lesscss'
 apply plugin: 'com.enonic.xp.app'
 
-version = '1.0.0'
-
 app {
-    name = 'no.vegard.it.xp.formbuilder'
-    displayName = 'Enonic XP Form Builder by Vegard Haugstvedt'
+    name = project.appName
+    displayName = project.displayName
     vendorName = 'Vegard Haugstvedt'
     vendorUrl = 'http://www.github.com/it-vegard'
 }
@@ -33,10 +30,6 @@ lessc {
     destinationDir = 'build/resources/main/site/assets/css'
     options.strictMath = true
     encoding = "utf-8"
-}
-
-ext {
-    xpVersion = '6.3.0'
 }
 
 dependencies {

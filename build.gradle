@@ -18,11 +18,11 @@ buildscript {
 apply plugin: 'lesscss'
 apply plugin: 'com.enonic.xp.app'
 
-version = '1.0.0'
+version = '1.1.0'
 
 app {
     name = 'no.vegard.it.xp.formbuilder'
-    displayName = 'Enonic XP Form Builder by Vegard Haugstvedt'
+    displayName = 'Enonic XP Form Builder'
     vendorName = 'Vegard Haugstvedt'
     vendorUrl = 'http://www.github.com/it-vegard'
 }

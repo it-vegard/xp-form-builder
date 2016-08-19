@@ -1,5 +1,5 @@
 <content-type>
-  <display-name>Input: Color</display-name>
+  <display-name>Form input - Color</display-name>
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>

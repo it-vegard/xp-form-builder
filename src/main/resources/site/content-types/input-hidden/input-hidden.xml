@@ -1,5 +1,5 @@
 <content-type>
-  <display-name>Input: Hidden</display-name>
+  <display-name>Form input - Hidden</display-name>
   <content-display-name-script>$('name')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>

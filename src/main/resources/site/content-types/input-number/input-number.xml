@@ -1,5 +1,5 @@
 <content-type>
-  <display-name>Input: Number</display-name>
+  <display-name>Form input - Number</display-name>
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>

@@ -1,5 +1,5 @@
 <content-type>
-  <display-name>Input: Search</display-name>
+  <display-name>Form input - Search</display-name>
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>

@@ -1,7 +1,6 @@
 var portal = require('/lib/xp/portal'); // Import the portal functions
 var thymeleaf = require('/lib/xp/thymeleaf'); // Import the Thymeleaf rendering function
 var contentLib = require('/lib/xp/content'); // Import the content library
-var auth = require('/lib/xp/auth'); // Import the content library
 
 var moment = require('/lib/moment.min.js'); // Import Moment.js
 

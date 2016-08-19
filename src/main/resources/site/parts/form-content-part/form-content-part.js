@@ -35,9 +35,11 @@ var createCssUrl = function(style) {
 
 // Handle the GET request
 exports.get = function(req) {
-
-    // Get the content data
-    var content = portal.getContent();
+    // Get the component data to check if a form has been added to the part.
+    // This enables the use of this part in other templates than the form template, as well as fragments
+    var component = portal.getComponent();
+    var componentConfig = component["config"];
+    var content = componentConfig.form ? contentLib.get({key: componentConfig.form}) : portal.getContent();
     var contentData = content.data;
 
     // Set up the form structure

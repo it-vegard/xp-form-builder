@@ -50,7 +50,8 @@ exports.get = function(req) {
     };
 
     // Specify the view file to use
-    var view = resolve(styleConfig[contentData.style].view);
+    var style = contentData.style || "default";
+    var view = resolve(styleConfig[style].view);
 
     // Get client-side JavaScript for the formbuilder
     var formScript = portal.assetUrl({
@@ -61,7 +62,7 @@ exports.get = function(req) {
     return {
         body: thymeleaf.render(view, model),
         pageContributions: {
-            headBegin: styleConfig[contentData.style].css ? "<link rel='stylesheet' href='" + createCssUrl(contentData.style) + "'/>" : "",
+            headBegin: styleConfig[style].css ? "<link rel='stylesheet' href='" + createCssUrl(style) + "'/>" : "",
             headEnd: "<script type='text/javascript' src='" + formScript + "'></script>"
         }
     };

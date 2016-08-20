@@ -21,6 +21,7 @@ exports.initForm = function (formConfig) {
         var inputContent = contentLib.get({key: inputId});
         if (inputContent !== null) {
           var input = {};
+          inputContent.data.id = inputContent._name;
           inputContent.data.name = formatName(inputContent.data.name);
           addCommonInputValues(input, inputContent.data);
           addCustomInputValues(input, inputContent.type, inputContent.data);

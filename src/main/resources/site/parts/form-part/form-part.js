@@ -43,6 +43,7 @@ exports.get = function(req) {
     // Get the component data to check if a form has been added to the part.
     // This enables the use of this part in other templates than the form template, as well as fragments
     var content = getFormContent();
+    content.data.id = content._name;
     var contentData = content.data;
 
     // Set up the form structure

@@ -227,7 +227,7 @@ var initButtonInput = function(input, inputContent) {
 /* Checkbox input */
 var initCheckboxInput = function(input, inputContent) {
   if (inputContent.state === "checked") {
-    input.checked = (input.class) ? "checked" : input.class + " checked";
+    input.checked = (input.class) ? input.class + " checked" : "checked";
   } else if (inputContent.state === "indeterminate") {
     input.class = (input.class) ? input.class + " indeterminate" : "indeterminate";
   }

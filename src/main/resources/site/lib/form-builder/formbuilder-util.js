@@ -241,7 +241,7 @@ var initColorInput = function(input, inputContent) {
   var colorOptions = LIST_UTIL.asList(inputContent.datalist.datalistOptions);
   input.placeholder = colorOptions[0].optionValue || "#000000";
   input.value = colorOptions[0].optionValue || "#000000";
-  addDatalist(input, inputContent);
+  addColorInputsAsDatalist(input, inputContent);
 };
 
 /* Date input */
@@ -389,6 +389,22 @@ var initUrlInput = function(input, inputContent) {
   input.placeholder = inputContent.placeholder || null;
   input.pattern = input.pattern || null;
 };
+
+var addColorInputsAsDatalist = function(input, inputContent) {
+  if (inputContent.colorList !== undefined) {
+    var colorList = inputContent.colorList;
+    input.datalist = {
+      id: (inputContent.id ? inputContent.id : inputContent.name) + "-datalist",
+      options: []
+    }
+    for (var i = 0; i < colorList.hexValues.length; i++) {
+      input.datalist.options[i] = {
+        label: colorList.hexValues[i],
+        value: colorList.hexValues[i]
+      }
+    }
+  }
+}
 
 var addDatalist = function(input, inputContent) {
   if (inputContent.datalist !== undefined) {

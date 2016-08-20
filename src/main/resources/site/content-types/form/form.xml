@@ -30,10 +30,12 @@
         <option value="post">POST</option>
         <option value="get">GET</option>
       </config>
+      <default>post</default>
     </input>
     <input type="CheckBox" name="useAjax">
       <label>Ajax submit</label>
       <occurrences minimum="0" maximum="1"/>
+      <default>checked</default>
     </input>
     <input type="ComboBox" name="style">
       <label>Style</label>
@@ -43,6 +45,7 @@
         <option value="xp-formbuilder">XP Formbuilder</option>
         <option value="bootstrap">Twitter Bootstrap</option>
       </config>
+      <default>bootstrap</default>
     </input>
     <item-set name="columns">
       <label>Columns</label>

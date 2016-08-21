@@ -1,6 +1,5 @@
 <content-type>
   <display-name>Form</display-name>
-  <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>
     <field-set name="basic-settings">

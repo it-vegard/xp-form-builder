@@ -13,27 +13,23 @@ exports.initForm = function (formConfig) {
     actionUrl: formConfig.actionUrl || portal.componentUrl({}),
     method: formConfig.method || "post",
     ajax: formConfig.useAjax || false,
-    columns: []
+    inputs: []
   };
-  LIST_UTIL.iterateSafely(formConfig.columns, function(column) {
-      var inputList = [];
-      LIST_UTIL.iterateSafely(column.inputs, function(inputId) {
-        var inputContent = contentLib.get({key: inputId});
-        if (inputContent !== null) {
-          var input = {};
-          inputContent.data.id = inputContent._name;
-          inputContent.data.name = formatName(inputContent.data.name);
-          addCommonInputValues(input, inputContent.data);
-          addCustomInputValues(input, inputContent.type, inputContent.data);
-          input.class = (input.class) ? input.class + " xp-input" : "xp-input";
-          input.class.trim();
-          inputList.push(input);
-          if (getInputType(inputContent.type) === "file") form.enctype = "multipart/form-data";
-        } else {
-          log.error("Could not retrieve input element with ID '" + inputId + "'.");
-        }
-      });
-      form.columns.push({inputs: inputList});
+  LIST_UTIL.iterateSafely(formConfig.inputs, function(inputId) {
+    var inputContent = contentLib.get({key: inputId});
+    if (inputContent !== null) {
+      var input = {};
+      inputContent.data.id = inputContent._name;
+      inputContent.data.name = formatName(inputContent.data.name);
+      addCommonInputValues(input, inputContent.data);
+      addCustomInputValues(input, inputContent.type, inputContent.data);
+      input.class = (input.class) ? input.class + " xp-input" : "xp-input";
+      input.class.trim();
+      form.inputs.push(input);
+      if (getInputType(inputContent.type) === "file") form.enctype = "multipart/form-data";
+    } else {
+      log.error("Could not retrieve input element with ID '" + inputId + "'.");
+    }
   });
   return form;
 };

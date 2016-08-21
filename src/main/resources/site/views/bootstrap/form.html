@@ -1,97 +1,95 @@
 <form data-th-id="${form.id}" id="my-form" data-th-class="${(form.ajax == true) ? 'ajax-submit ' : ''} + 'xp-formbuilder-form'" data-th-action="${form.actionUrl}" action="#" data-th-method="${form.method}" method="post">
   <h2 data-th-text="${form.title}" data-th-if="${form.title}">Form-part</h2>
-  <div data-th-each="column : ${form.columns}" class="column">
-    <div class="form-group" data-th-each="input : ${column.inputs}">
-      <div data-th-switch="${input.type}" data-th-remove="tag">
-        <div data-th-case="checkbox" class="checkbox">
-          <label data-th-for="${input.id}" for="input-id">
-            <input type="checkbox"
-              data-th-id="${input.id}" id="input-id"
-              data-th-name="${input.name}" name="input-name"
-              data-th-readonly="${input.readonly}"
-              data-th-disabled="${input.disabled}"
-              data-th-required="${input.required}"
-              data-th-checked="${input.checked}"
-              data-th-class="${input.class ? input.class + ' ' : ''} + 'xp-form-' + ${input.type}"
-              data-th-title="${input.title}"/>
-            <span data-th-text="${input.label}" data-th-remove="tag">Label</span>
-          </label>
-        </div>
-        <div data-th-case="radio" data-th-remove="tag">
-          <label data-th-for="${input.id + '-' + input.options[0].value}" for="input-id" data-th-text="${input.label}">Label</label>
-          <div data-th-each="option,iteration : ${input.options}" class="radio">
-            <label data-th-for="${input.id + '-' + iteration.index}" for="input-id">
-              <input type="radio" 
-                data-th-id="${input.id + '-' + iteration.index}" id="input-id" 
-                data-th-name="${input.name}" name="input-name" 
-                data-th-class="${input.class ? input.class + ' ' : ''} + 'xp-form-' + ${input.type}" class="xp-form-radio"
-                data-th-value="${option.value}" value="option-value" 
-                data-th-checked="${option.checked}" checked="false"/>
-              <span data-th-text="${option.text}" data-th-remove="tag">Label</span>
-            </label>
-          </div>
-        </div>
-        <div data-th-case="range" data-th-remove="tag">
-          <label data-th-for="${input.id}" for="input-id" data-th-text="${input.label}">Label</label>
-          <select type="range"
-            data-th-id="${input.id}"
-            data-th-name="${input.name}"
-            data-th-title="${input.title}"
-            data-th-class="${(input.class ? input.class + ' ' : '') + 'form-control'}"
-            data-th-min="${input.min}"
-            data-th-max="${input.max}"
-            data-th-step="${input.step}"
-            data-th-value="${input.value}"
-            data-th-list="${input.datalist ? input.datalist.id : ''}">
-            <div data-th-if="${input.datalist}" data-th-remove="tag">
-              <div data-th-if="!${#lists.isEmpty(input.datalist.options)}" data-th-remove="tag">
-                <div data-th-each="option : ${input.datalist.options}" data-th-remove="tag">
-                  <option
-                    data-th-label="${option.label}" label="Search label"
-                    data-th-text="${option.value}">Search value</option>
-                </div>
-              </div>
-            </div>
-          </select>
-        </div>
-        <div data-th-case="*" data-th-remove="tag">
-          <label data-th-for="${input.id}" for="input-id" data-th-text="${input.label}">Label</label>
-          <input data-th-type="${input.type}" type="text"
+  <div class="form-group" data-th-each="input : ${form.inputs}">
+    <div data-th-switch="${input.type}" data-th-remove="tag">
+      <div data-th-case="checkbox" class="checkbox">
+        <label data-th-for="${input.id}" for="input-id">
+          <input type="checkbox"
             data-th-id="${input.id}" id="input-id"
             data-th-name="${input.name}" name="input-name"
-            data-th-value="${input.value}"
             data-th-readonly="${input.readonly}"
             data-th-disabled="${input.disabled}"
-            data-th-size="${input.size}"
-            data-th-maxlength="${input.maxlength}"
-            data-th-autocomplete="${input.autocomplete}"
-            data-th-autofocus="${input.autofocus}"
-            data-th-formaction="${input.formaction}"
-            data-th-formmethod="${input.formmethod}"
-            data-th-formenctype="${input.formenctype}"
-            data-th-height="${input.height}"
-            data-th-width="${input.width}"
-            data-th-min="${input.min}"
-            data-th-max="${input.max}"
-            data-th-step="${input.step}"
-            data-th-list="${input.datalist ? input.datalist.id : ''}"
-            data-th-multiple="${input.multiple}"
-            data-th-pattern="${input.pattern}"
-            data-th-placeholder="${input.placeholder}"
             data-th-required="${input.required}"
             data-th-checked="${input.checked}"
-            data-th-class="${input.class ? input.class + ' ' : ''} + 'form-control xp-form-' + ${input.type}"
-            data-th-title="${input.title}"
-            data-th-accept="${input.accept}"
-            th:attr="minlength=${input.minlength},capture=${input.capture}"/>
+            data-th-class="${input.class ? input.class + ' ' : ''} + 'xp-form-' + ${input.type}"
+            data-th-title="${input.title}"/>
+          <span data-th-text="${input.label}" data-th-remove="tag">Label</span>
+        </label>
+      </div>
+      <div data-th-case="radio" data-th-remove="tag">
+        <label data-th-for="${input.id + '-' + input.options[0].value}" for="input-id" data-th-text="${input.label}">Label</label>
+        <div data-th-each="option,iteration : ${input.options}" class="radio">
+          <label data-th-for="${input.id + '-' + iteration.index}" for="input-id">
+            <input type="radio" 
+              data-th-id="${input.id + '-' + iteration.index}" id="input-id" 
+              data-th-name="${input.name}" name="input-name" 
+              data-th-class="${input.class ? input.class + ' ' : ''} + 'xp-form-' + ${input.type}" class="xp-form-radio"
+              data-th-value="${option.value}" value="option-value" 
+              data-th-checked="${option.checked}" checked="false"/>
+            <span data-th-text="${option.text}" data-th-remove="tag">Label</span>
+          </label>
+        </div>
+      </div>
+      <div data-th-case="range" data-th-remove="tag">
+        <label data-th-for="${input.id}" for="input-id" data-th-text="${input.label}">Label</label>
+        <select type="range"
+          data-th-id="${input.id}"
+          data-th-name="${input.name}"
+          data-th-title="${input.title}"
+          data-th-class="${(input.class ? input.class + ' ' : '') + 'form-control'}"
+          data-th-min="${input.min}"
+          data-th-max="${input.max}"
+          data-th-step="${input.step}"
+          data-th-value="${input.value}"
+          data-th-list="${input.datalist ? input.datalist.id : ''}">
           <div data-th-if="${input.datalist}" data-th-remove="tag">
             <div data-th-if="!${#lists.isEmpty(input.datalist.options)}" data-th-remove="tag">
-              <datalist data-th-id="${input.datalist.id}" id="input-search-datalist">
-                <div data-th-each="option : ${input.datalist.options}" data-th-remove="tag">
-                  <option data-th-text="${option.value}">Search value</option>
-                </div>
-              </datalist>
+              <div data-th-each="option : ${input.datalist.options}" data-th-remove="tag">
+                <option
+                  data-th-label="${option.label}" label="Search label"
+                  data-th-text="${option.value}">Search value</option>
+              </div>
             </div>
+          </div>
+        </select>
+      </div>
+      <div data-th-case="*" data-th-remove="tag">
+        <label data-th-for="${input.id}" for="input-id" data-th-text="${input.label}">Label</label>
+        <input data-th-type="${input.type}" type="text"
+          data-th-id="${input.id}" id="input-id"
+          data-th-name="${input.name}" name="input-name"
+          data-th-value="${input.value}"
+          data-th-readonly="${input.readonly}"
+          data-th-disabled="${input.disabled}"
+          data-th-size="${input.size}"
+          data-th-maxlength="${input.maxlength}"
+          data-th-autocomplete="${input.autocomplete}"
+          data-th-autofocus="${input.autofocus}"
+          data-th-formaction="${input.formaction}"
+          data-th-formmethod="${input.formmethod}"
+          data-th-formenctype="${input.formenctype}"
+          data-th-height="${input.height}"
+          data-th-width="${input.width}"
+          data-th-min="${input.min}"
+          data-th-max="${input.max}"
+          data-th-step="${input.step}"
+          data-th-list="${input.datalist ? input.datalist.id : ''}"
+          data-th-multiple="${input.multiple}"
+          data-th-pattern="${input.pattern}"
+          data-th-placeholder="${input.placeholder}"
+          data-th-required="${input.required}"
+          data-th-checked="${input.checked}"
+          data-th-class="${input.class ? input.class + ' ' : ''} + 'form-control xp-form-' + ${input.type}"
+          data-th-title="${input.title}"
+          data-th-accept="${input.accept}"
+          th:attr="minlength=${input.minlength},capture=${input.capture}"/>
+        <div data-th-if="${input.datalist}" data-th-remove="tag">
+          <div data-th-if="!${#lists.isEmpty(input.datalist.options)}" data-th-remove="tag">
+            <datalist data-th-id="${input.datalist.id}" id="input-search-datalist">
+              <div data-th-each="option : ${input.datalist.options}" data-th-remove="tag">
+                <option data-th-text="${option.value}">Search value</option>
+              </div>
+            </datalist>
           </div>
         </div>
       </div>

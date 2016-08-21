@@ -1,5 +1,5 @@
 <page>
-  <display-name>Hello Form</display-name>
+  <display-name>Formbuilder test page</display-name>
   <config/>
   <regions>
     <region name="main"/>

@@ -9,7 +9,7 @@ exports.initForm = function (formConfig) {
   var form = {
     id: formConfig.id || null,
     title: formConfig.title || null,
-    submitText: formConfig.submitText || "Send inn",
+    submitText: formConfig.submitText || "Submit",
     actionUrl: formConfig.actionUrl || portal.componentUrl({}),
     method: formConfig.method || "post",
     ajax: formConfig.useAjax || false,

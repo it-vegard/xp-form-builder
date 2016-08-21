@@ -87,13 +87,12 @@
         </input>
         <input type="ComboBox" name="style">
           <label>Style</label>
-          <occurrences minimum="1" maximum="1"/>
+          <occurrences minimum="0" maximum="1"/>
           <config>
             <option value="default">Browser default</option>
             <option value="xp-formbuilder">XP Formbuilder</option>
             <option value="bootstrap">Twitter Bootstrap</option>
           </config>
-          <default>bootstrap</default>
           <help-text>Select which styling to apply. If "Browser default" is used, no style sheet is loaded for the form application, and you have full control over the form styling. "Twitter Bootstrap" currently uses v.3.3.5. "XP Formbuilder" is an extra example.</help-text>
         </input>
       </items>

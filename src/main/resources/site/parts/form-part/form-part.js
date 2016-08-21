@@ -40,6 +40,9 @@ var getFormContent = function() {
 
 // Handle the GET request
 exports.get = function(req) {
+    // Get site config
+    var siteConfig = portal.getSiteConfig();
+
     // Get the component data to check if a form has been added to the part.
     // This enables the use of this part in other templates than the form template, as well as fragments
     var content = getFormContent();
@@ -55,8 +58,8 @@ exports.get = function(req) {
         form: form
     };
 
-    // Specify the view file to use
-    var style = contentData.style || "default";
+    // Specify the view file to use. Use form config as primary option, site config as secondary option and "default" as fallback/default.
+    var style = contentData.style || siteConfig["formbuilder-style"] || "default";
     var view = resolve(styleConfig[style].view);
 
     // Get client-side JavaScript for the formbuilder

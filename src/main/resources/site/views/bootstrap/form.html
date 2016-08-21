@@ -1,5 +1,5 @@
 <form data-th-id="${form.id}" id="my-form" data-th-class="${(form.ajax == true) ? 'ajax-submit ' : ''} + 'xp-formbuilder-form'" data-th-action="${form.actionUrl}" action="#" data-th-method="${form.method}" method="post">
-  <h2 data-th-text="${form.title}">Form-part</h2>
+  <h2 data-th-text="${form.title}" data-th-if="${form.title}">Form-part</h2>
   <div data-th-each="column : ${form.columns}" class="column">
     <div class="form-group" data-th-each="input : ${column.inputs}">
       <div data-th-switch="${input.type}" data-th-remove="tag">

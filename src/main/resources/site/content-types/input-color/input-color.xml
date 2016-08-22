@@ -6,7 +6,11 @@
     <field-set name="input">
       <label>Input</label>
       <items>
-        <inline mixin="input-mixin"/>
+        <inline mixin="attr-name"/>
+        <inline mixin="attr-label"/>
+        <inline mixin="attr-title"/>
+        <inline mixin="attr-class"/>
+        <inline mixin="attr-required"/>
         <item-set name="colorList">
           <label>List of colors to choose from (optional)</label>
           <items>

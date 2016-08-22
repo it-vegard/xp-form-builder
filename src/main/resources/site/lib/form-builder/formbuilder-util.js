@@ -19,8 +19,9 @@ exports.initForm = function (formConfig) {
     var inputContent = contentLib.get({key: inputId});
     if (inputContent !== null) {
       var input = {};
-      inputContent.data.id = inputContent._name;
-      inputContent.data.name = formatName(inputContent.data.name);
+      var inputName = inputContent.data.name || inputContent._name;
+      inputContent.data.id = formatName(inputName);
+      inputContent.data.name = formatName(inputName);
       addCommonInputValues(input, inputContent.data);
       addCustomInputValues(input, inputContent.type, inputContent.data);
       input.class = (input.class) ? input.class + " xp-input" : "xp-input";
@@ -429,7 +430,7 @@ var formatDate = function(date) {
 };
 
 var formatName = function(name) {
-  return name.replace('-', '_');
+  return name.replace(' ', '_').replace('-', '_');
 };
 
 var supportsCapture = function(accept) {

@@ -236,9 +236,9 @@ var initCheckboxInput = function(input, inputContent) {
 /* Color input */
 var initColorInput = function(input, inputContent) {
   input.title = inputContent.title || null;
-  var colorOptions = LIST_UTIL.asList(inputContent.datalist.datalistOptions);
-  input.placeholder = colorOptions[0].optionValue || "#000000";
-  input.value = colorOptions[0].optionValue || "#000000";
+  var colorOptions = LIST_UTIL.asList(inputContent.colorList.hexValues);
+  input.placeholder = colorOptions[0] || "#000000";
+  input.value = colorOptions[0] || "#000000";
   addColorInputsAsDatalist(input, inputContent);
 };
 

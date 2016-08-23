@@ -3,13 +3,11 @@
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>
-    <field-set name="input">
-      <label>Input</label>
+    <field-set name="basic-settings">
+      <label>Basic settings</label>
       <items>
-        <inline mixin="attr-name"/>
         <inline mixin="attr-label"/>
         <inline mixin="attr-title"/>
-        <inline mixin="attr-class"/>
         <inline mixin="attr-required"/>
         <item-set name="colorList">
           <label>List of colors to choose from (optional)</label>
@@ -22,6 +20,13 @@
           <immutable>false</immutable>
           <occurrences minimum="0" maximum="1"/>
         </item-set>
+      </items>
+    </field-set>
+    <field-set name="advanced-settings">
+      <label>Advanced settings</label>
+      <items>
+        <inline mixin="attr-name"/>
+        <inline mixin="attr-class"/>
       </items>
     </field-set>
   </form>

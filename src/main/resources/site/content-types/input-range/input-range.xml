@@ -3,19 +3,29 @@
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>
-    <field-set name="input">
-      <label>Input</label>
+    <field-set name="basic-settings">
+      <label>Basic settings</label>
       <items>
-        <inline mixin="attr-name"/>
         <inline mixin="attr-label"/>
         <inline mixin="attr-title"/>
-        <inline mixin="attr-class"/>
-        <inline mixin="attr-required"/>
         <inline mixin="attr-min"/>
         <inline mixin="attr-max"/>
+        <inline mixin="attr-required"/>
+      </items>
+    </field-set>
+    <field-set name="limits-settings">
+      <label>Limits</label>
+      <items>
         <inline mixin="attr-value"/>
         <inline mixin="attr-step"/>
         <inline mixin="attr-ticks"/>
+      </items>
+    </field-set>
+    <field-set name="advanced-settings">
+      <label>Advanced settings</label>
+      <items>
+        <inline mixin="attr-name"/>
+        <inline mixin="attr-class"/>
       </items>
     </field-set>
   </form>

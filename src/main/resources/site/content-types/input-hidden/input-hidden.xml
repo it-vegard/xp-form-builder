@@ -3,12 +3,16 @@
   <content-display-name-script>$('name')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>
-    <field-set name="input">
-      <label>Input</label>
+    <field-set name="basic-settings">
+      <label>Basic settings</label>
       <items>
-        <inline mixin="attr-id"/>
-        <inline mixin="attr-name"/>
         <inline mixin="attr-value"/>
+      </items>
+    </field-set>
+    <field-set name="advanced-settings">
+      <label>Advanced settings</label>
+      <items>
+        <inline mixin="attr-name"/>
         <inline mixin="attr-class"/>
       </items>
     </field-set>

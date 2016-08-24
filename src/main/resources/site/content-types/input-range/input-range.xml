@@ -14,7 +14,7 @@
       </items>
     </field-set>
     <field-set name="limits-settings">
-      <label>Limits</label>
+      <label>Slider settings</label>
       <items>
         <inline mixin="attr-value"/>
         <inline mixin="attr-step"/>

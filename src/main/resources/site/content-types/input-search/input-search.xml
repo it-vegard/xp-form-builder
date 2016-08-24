@@ -9,7 +9,17 @@
         <inline mixin="attr-label"/>
         <inline mixin="attr-title"/>
         <inline mixin="attr-placeholder"/>
-        <inline mixin="attr-datalist"/>
+        <item-set name="datalistOptions">
+          <label>Search terms</label>
+          <items>
+            <input name="optionLabel" type="TextLine">
+              <label>Display name</label>
+              <occurrences minimum="1" maximum="1"/>
+            </input>
+          </items>
+          <immutable>false</immutable>
+          <occurrences minimum="0" maximum="0"/>
+        </item-set>
         <inline mixin="attr-required"/>
       </items>
     </field-set>

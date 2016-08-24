@@ -405,8 +405,8 @@ var addColorInputsAsDatalist = function(input, inputContent) {
 }
 
 var addDatalist = function(input, inputContent) {
-  if (inputContent.datalist !== undefined) {
-    var options = inputContent.datalist.datalistOptions;
+  if (inputContent.datalistOptions !== undefined) {
+    var options = inputContent.datalistOptions;
     input.datalist = {
       id: (inputContent.id ? inputContent.id : inputContent.name) + "-datalist",
       options: []
@@ -414,7 +414,7 @@ var addDatalist = function(input, inputContent) {
     for (var i = 0; i < options.length; i++) {
       input.datalist.options[i] = {
         label: options[i].optionLabel,
-        value: options[i].optionValue
+        value: options[i].optionValue || options[i].optionLabel
       }
     }
   }

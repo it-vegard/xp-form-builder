@@ -48,7 +48,7 @@
             <div data-th-if="!${#lists.isEmpty(input.datalist.options)}" data-th-remove="tag">
               <datalist data-th-id="${input.datalist.id}" id="input-search-datalist">
                 <div data-th-each="option : ${input.datalist.options}" data-th-remove="tag">
-                  <option data-th-text="${option.value}">Search value</option>
+                  <option data-th-text="${option.label}" data-th-value="${option.value}">Search value</option>
                 </div>
               </datalist>
             </div>

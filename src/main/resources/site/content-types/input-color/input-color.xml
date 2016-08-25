@@ -9,17 +9,10 @@
         <inline mixin="attr-label"/>
         <inline mixin="attr-title"/>
         <inline mixin="attr-required"/>
-        <item-set name="colorList">
+        <input name="colorList" type="TextLine">
           <label>List of colors to choose from (optional)</label>
-          <items>
-            <input name="hexValues" type="TextLine">
-              <label>Add a hex color (e.g. #000000)</label>
-              <occurrences minimum="1" maximum="0"/>
-            </input>
-          </items>
-          <immutable>false</immutable>
-          <occurrences minimum="0" maximum="1"/>
-        </item-set>
+          <occurrences minimum="0" maximum="0"/>
+        </input>
       </items>
     </field-set>
     <field-set name="advanced-settings">

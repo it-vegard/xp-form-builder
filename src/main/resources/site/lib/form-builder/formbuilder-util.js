@@ -358,7 +358,7 @@ var initResetInput = function(input, inputContent) {
 var initSearchInput = function(input, inputContent) {
   input.placeholder = inputContent.placeholder || null;
   input.pattern = inputContent.pattern || null;
-  addDatalist(input, inputContent);
+  addSearchTermsAsDatalist(input, inputContent);
 };
 
 /* Submit input */
@@ -395,26 +395,26 @@ var addColorInputsAsDatalist = function(input, inputContent) {
       id: (inputContent.id ? inputContent.id : inputContent.name) + "-datalist",
       options: []
     }
-    for (var i = 0; i < colorList.hexValues.length; i++) {
+    for (var i = 0; i < colorList.length; i++) {
       input.datalist.options[i] = {
-        label: colorList.hexValues[i],
-        value: colorList.hexValues[i]
+        label: colorList[i],
+        value: colorList[i]
       }
     }
   }
 }
 
-var addDatalist = function(input, inputContent) {
-  if (inputContent.datalistOptions !== undefined) {
-    var options = inputContent.datalistOptions;
+var addSearchTermsAsDatalist = function(input, inputContent) {
+  if (inputContent.searchTerms !== undefined) {
+    var options = inputContent.searchTerms;
     input.datalist = {
       id: (inputContent.id ? inputContent.id : inputContent.name) + "-datalist",
       options: []
     }
     for (var i = 0; i < options.length; i++) {
       input.datalist.options[i] = {
-        label: options[i].optionLabel,
-        value: options[i].optionValue || options[i].optionLabel
+        label: options[i],
+        value: options[i]
       }
     }
   }

@@ -2,7 +2,7 @@
   <h2 data-th-text="${form.title}" data-th-if="${form.title}">Form-part</h2>
   <div data-th-each="input : ${form.inputs}" class="xp-form-input">
     <label data-th-for="${input.id}" for="input-id">
-      <span data-th-text="${input.label}" data-th-remove="tag">Label</span>
+      <span data-th-if="${input.type != 'checkbox'}" data-th-text="${input.label}" data-th-remove="tag">Label</span>
       <div data-th-switch="${input.type}" data-th-remove="tag">
         <div data-th-case="radio" data-th-remove="tag">
           <div data-th-each="option : ${input.options}">
@@ -14,6 +14,21 @@
               data-th-checked="${option.checked}" checked="false"/>
             <br/>
           </div>
+        </div>
+        <div data-th-case="checkbox" data-th-remove="tag">
+          <label data-th-for="${input.id}" for="input-id">
+            <input type="checkbox"
+              data-th-id="${input.id}" id="input-id"
+              data-th-name="${input.name}" name="input-name"
+              data-th-readonly="${input.readonly}"
+              data-th-disabled="${input.disabled}"
+              data-th-required="${input.required}"
+              data-th-checked="${input.checked}"
+              data-th-state="${input.state}"
+              data-th-class="${input.class ? input.class + ' ' : ''} + 'xp-form-' + ${input.type}"
+              data-th-title="${input.title}"/>
+            <span data-th-text="${input.label}">Label</span>
+          </label>
         </div>
         <div data-th-case="*" data-th-remove="tag">
           <input data-th-type="${input.type}" type="text"

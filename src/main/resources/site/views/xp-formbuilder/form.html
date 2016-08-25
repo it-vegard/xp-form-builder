@@ -43,8 +43,9 @@
             data-th-title="${input.title}"
             data-th-required="${input.required}"
             data-th-value="${input.value}"
-            data-th-checked="${input.checked}"/>
-          <div class="checkmark">&#10004;<span class="checkbox-text" data-th-text="${input.text}">Text</span></div>
+            data-th-checked="${input.checked}"
+            data-th-state="${input.state}"/>
+          <div class="checkmark">&#10004;<span class="checkbox-text" data-th-text="${input.label}">Text</span></div>
         </div>
         <div data-th-case="*" data-th-remove="tag">
           <input data-th-type="${input.type}" type="text"

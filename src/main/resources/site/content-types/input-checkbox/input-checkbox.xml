@@ -6,16 +6,20 @@
     <field-set name="basic-settings">
       <label>Basic settings</label>
       <items>
-        <inline mixin="attr-label"/>
+        <input name="label" type="TextLine">
+          <label>Label</label>
+          <occurrences minimum="1" maximum="1"/>
+          <config/>
+          <help-text>[Required] Set the label for the checkbox. This should explain what the user agrees to or selects, and not just be a single word, as this is the only thing being read from this checkbox.</help-text>
+        </input>
         <inline mixin="attr-title"/>
         <inline mixin="attr-required"/>
         <input name="value" type="TextLine">
           <label>Value</label>
           <occurrences minimum="0" maximum="1"/>
           <config/>
-          <help-text>This is the value returned if the checkbox is checked. Setting this is useful in cases where checkboxes are grouped, and multiple can be checked. For example where the user can check off multiple interests.</help-text>
+          <help-text>[Optional] This is the value returned if the checkbox is checked. Setting this is useful in cases where checkboxes are grouped, and multiple can be checked. For example where the user can check off multiple interests.</help-text>
         </input>
-        <inline mixin="attr-text"/>
       </items>
     </field-set>
     <field-set name="advanced-settings">

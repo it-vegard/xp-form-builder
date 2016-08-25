@@ -12,6 +12,7 @@
         <input name="searchTerms" type="TextLine">
           <label>Search terms</label>
           <occurrences minimum="0" maximum="0"/>
+          <help-text>[Optional] Add often used search terms, or terms you want users to search for. This will enable an "auto-suggestion" feature, where the search terms that match what the user has entered appear as a dropdown list.</help-text>
         </input>
         <inline mixin="attr-required"/>
       </items>

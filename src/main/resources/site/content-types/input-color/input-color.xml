@@ -12,6 +12,7 @@
         <input name="colorList" type="TextLine">
           <label>List of colors to choose from (optional)</label>
           <occurrences minimum="0" maximum="0"/>
+          <help-text>[Optional] Add a list of hex colors (e.g. #000000 for black) to customize what colors are selectable in the color picker. Leave this empty to use the default colors.</help-text>
         </input>
       </items>
     </field-set>

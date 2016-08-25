@@ -5,7 +5,7 @@
       <label>Tooltip</label>
       <occurrences minimum="0" maximum="1"/>
       <config/>
-      <help-text>This text is added as the title attribute of the input. By default, this text is shown as a tooltip when hovering the mouse above the input field.</help-text>
+      <help-text>[Optional] This text is added as the title attribute of the input. By default, this text is shown as a tooltip when hovering the mouse above the input field.</help-text>
     </input>
   </items>
 </mixin>

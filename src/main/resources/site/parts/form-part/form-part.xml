@@ -4,79 +4,13 @@
     <field-set name="form">
       <label>Form</label>
       <items>
-        <input type="TextLine" name="id">
-          <label>ID</label>
-          <occurrences minimum="1" maximum="1"/>
-        </input>
-        <input type="TextLine" name="title">
-          <label>Title</label>
-          <occurrences minimum="1" maximum="1"/>
-        </input>
-        <input type="TextLine" name="actionUrl">
-          <label>Action URL</label>
-          <occurrences minimum="0" maximum="1"/>
-        </input>
-        <input type="ContentSelector" name="responseFolder">
-          <label>Folder to store responses</label>
+        <input type="ContentSelector" name="form">
+          <label>Add form</label>
           <occurrences minimum="0" maximum="1"/>
           <config>
             <relationship-type>system:reference</relationship-type>
-            <allow-content-type>base:folder</allow-content-type>
+            <allow-content-type>no.vegard.it.xp.formbuilder:form</allow-content-type>
           </config>
-        </input>
-        <input type="ComboBox" name="method">
-          <label>Submit method</label>
-          <occurrences minimum="1" maximum="1"/>
-          <config>
-            <option value="post">POST</option>
-            <option value="get">GET</option>
-          </config>
-        </input>
-        <input type="CheckBox" name="useAjax">
-          <label>Ajax submit</label>
-          <occurrences minimum="0" maximum="1"/>
-        </input>
-        <input type="ComboBox" name="style">
-          <label>Style</label>
-          <occurrences minimum="1" maximum="1"/>
-          <config>
-            <option value="default">Browser default</option>
-            <option value="xp-formbuilder">XP Formbuilder</option>
-            <option value="bootstrap">Twitter Bootstrap</option>
-          </config>
-        </input>
-        <item-set name="columns">
-          <label>Columns</label>
-          <items>
-            <input name="inputs" type="ContentSelector">
-              <label>Inputs</label>
-              <occurrences minimum="1" maximum="0"/>
-              <config>
-                <relationship-type>system:reference</relationship-type>
-                <allow-content-type>input-checkbox</allow-content-type>
-                <allow-content-type>input-color</allow-content-type>
-                <allow-content-type>input-date</allow-content-type>
-                <allow-content-type>input-datetime-local</allow-content-type>
-                <allow-content-type>input-email</allow-content-type>
-                <allow-content-type>input-file</allow-content-type>
-                <allow-content-type>input-number</allow-content-type>
-                <allow-content-type>input-password</allow-content-type>
-                <allow-content-type>input-radio</allow-content-type>
-                <allow-content-type>input-range</allow-content-type>
-                <allow-content-type>input-search</allow-content-type>
-                <allow-content-type>input-tel</allow-content-type>
-                <allow-content-type>input-text</allow-content-type>
-                <allow-content-type>input-time</allow-content-type>
-                <allow-content-type>input-url</allow-content-type>
-              </config>
-            </input>
-          </items>
-          <immutable>false</immutable>
-          <occurrences minimum="1" maximum="0"/>
-        </item-set>
-        <input type="TextLine" name="response">
-          <label>Response message</label>
-          <occurrences minimum="0" maximum="1"/>
         </input>
       </items>
     </field-set>

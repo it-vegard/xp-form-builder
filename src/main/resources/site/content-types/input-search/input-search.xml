@@ -1,15 +1,28 @@
 <content-type>
-  <display-name>Input: Search</display-name>
+  <display-name>Form input - Search</display-name>
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>
-    <field-set name="input">
-      <label>Input</label>
+    <field-set name="basic-settings">
+      <label for="">Basic settings</label>
       <items>
-        <inline mixin="input-mixin"/>
+        <inline mixin="attr-label"/>
+        <inline mixin="attr-title"/>
         <inline mixin="attr-placeholder"/>
+        <input name="searchTerms" type="TextLine">
+          <label>Search terms</label>
+          <occurrences minimum="0" maximum="0"/>
+          <help-text>[Optional] Add often used search terms, or terms you want users to search for. This will enable an "auto-suggestion" feature, where the search terms that match what the user has entered appear as a dropdown list.</help-text>
+        </input>
+        <inline mixin="attr-required"/>
+      </items>
+    </field-set>
+    <field-set name="advanced-settings">
+      <label>Advanced settings</label>
+      <items>
+        <inline mixin="attr-name"/>
+        <inline mixin="attr-class"/>
         <inline mixin="attr-pattern"/>
-        <inline mixin="attr-datalist"/>
       </items>
     </field-set>
   </form>

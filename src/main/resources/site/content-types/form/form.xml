@@ -1,54 +1,17 @@
 <content-type>
   <display-name>Form</display-name>
-  <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>
-    <input type="TextLine" name="id">
-      <label>ID</label>
-      <occurrences minimum="1" maximum="1"/>
-    </input>
-    <input type="TextLine" name="title">
-      <label>Title</label>
-      <occurrences minimum="1" maximum="1"/>
-    </input>
-    <input type="TextLine" name="actionUrl">
-      <label>Action URL</label>
-      <occurrences minimum="0" maximum="1"/>
-    </input>
-    <input type="ContentSelector" name="responseFolder">
-      <label>Folder to store responses</label>
-      <occurrences minimum="0" maximum="1"/>
-      <config>
-        <relationship-type>system:reference</relationship-type>
-        <allow-content-type>base:folder</allow-content-type>
-      </config>
-    </input>
-    <input type="ComboBox" name="method">
-      <label>Submit method</label>
-      <occurrences minimum="1" maximum="1"/>
-      <config>
-        <option value="post">POST</option>
-        <option value="get">GET</option>
-      </config>
-    </input>
-    <input type="CheckBox" name="useAjax">
-      <label>Ajax submit</label>
-      <occurrences minimum="0" maximum="1"/>
-    </input>
-    <input type="ComboBox" name="style">
-      <label>Style</label>
-      <occurrences minimum="1" maximum="1"/>
-      <config>
-        <option value="default">Browser default</option>
-        <option value="xp-formbuilder">XP Formbuilder</option>
-        <option value="bootstrap">Twitter Bootstrap</option>
-      </config>
-    </input>
-    <item-set name="columns">
-      <label>Columns</label>
+    <field-set name="basic-settings">
+      <label>Basic configuration</label>
       <items>
+        <input type="TextLine" name="title">
+          <label>Title</label>
+          <occurrences minimum="0" maximum="1"/>
+          <help-text>Optionally add a title to the form.</help-text>
+        </input>
         <input name="inputs" type="ContentSelector">
-          <label>Inputs</label>
+          <label>Add input fields</label>
           <occurrences minimum="1" maximum="0"/>
           <config>
             <relationship-type>system:reference</relationship-type>
@@ -68,14 +31,70 @@
             <allow-content-type>input-time</allow-content-type>
             <allow-content-type>input-url</allow-content-type>
           </config>
+          <help-text>Add the input fields to display in your form. These must be created before they can be added, but you can save the form and return to add them later.</help-text>
         </input>
       </items>
-      <immutable>false</immutable>
-      <occurrences minimum="1" maximum="0"/>
-    </item-set>
-    <input type="TextLine" name="response">
-      <label>Response message</label>
-      <occurrences minimum="0" maximum="1"/>
-    </input>
+    </field-set>
+    <field-set name="submit-settings">
+      <label>Submit-settings</label>
+      <items>
+        <input type="TextLine" name="actionUrl">
+          <label>URL to submit form to</label>
+          <occurrences minimum="0" maximum="1"/>
+          <help-text>This is used as the "action" attribute on the form, and refers to where the form is sent when submitted. You can leave this empty unless you want to submit to a a third-party application or want to handle the response in a special way. If empty, the form is submitted to the current page, and the default handler saves the response to the folder specified. When the "Ajax submit" is checked, only the form data is sent to the target URL, while the user remains on the current page.</help-text>
+        </input>
+        <input type="ContentSelector" name="responseFolder">
+          <label>Folder to store responses</label>
+          <occurrences minimum="0" maximum="1"/>
+          <config>
+            <relationship-type>system:reference</relationship-type>
+            <allow-content-type>base:folder</allow-content-type>
+          </config>
+          <help-text>Select where to store response content. If no folder is selected, the responses will be stored as child elements of the current page.</help-text>
+        </input>
+        <input type="TextLine" name="response">
+          <label>Response message</label>
+          <occurrences minimum="0" maximum="1"/>
+          <help-text>Add a response to show to the user when the form has been submitted. This is only used when "Ajax submit" is enabled.</help-text>
+        </input>
+        <input type="TextLine" name="submitText">
+          <label>Submit button-text</label>
+          <occurrences minimum="0" maximum="1"/>
+          <default>Submit</default>
+          <help-text>Customize the text of the select button if you want. Defaults to "Submit".</help-text>
+        </input>
+      </items>
+    </field-set>
+    <field-set name="advanced-settings">
+      <label>Advanced settings</label>
+      <items>
+        <input type="ComboBox" name="method">
+          <label>Submit method</label>
+          <occurrences minimum="1" maximum="1"/>
+          <config>
+            <option value="post">POST</option>
+            <option value="get">GET</option>
+          </config>
+          <default>post</default>
+          <help-text>"GET" should be used for example in searches, where the input parameters define what the user views. "POST" should be used when changing data or in most cases when submitting a form.</help-text>
+        </input>
+        <input type="CheckBox" name="useAjax">
+          <label>Ajax submit</label>
+          <occurrences minimum="0" maximum="1"/>
+          <default>checked</default>
+          <help-text>Only un-check when the user should be sent to the target page upon submitting the form. An example of when this is useful is a search form, where the user should arrive at a result-page.</help-text>
+        </input>
+        <input type="ComboBox" name="style">
+          <label>Style</label>
+          <occurrences minimum="0" maximum="1"/>
+          <config>
+            <option value="default">Browser default</option>
+            <option value="xp-formbuilder">XP Formbuilder</option>
+            <option value="bootstrap">Twitter Bootstrap</option>
+          </config>
+          <help-text>Select which styling to apply. If "Browser default" is used, no style sheet is loaded for the form application, and you have full control over the form styling. "Twitter Bootstrap" currently uses v.3.3.5. "XP Formbuilder" is an extra example.</help-text>
+        </input>
+      </items>
+    </field-set>
   </form>
 </content-type>

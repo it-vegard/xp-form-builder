@@ -9,29 +9,28 @@ exports.initForm = function (formConfig) {
   var form = {
     id: formConfig.id || null,
     title: formConfig.title || null,
+    submitText: formConfig.submitText || "Submit",
     actionUrl: formConfig.actionUrl || portal.componentUrl({}),
     method: formConfig.method || "post",
     ajax: formConfig.useAjax || false,
-    columns: []
+    inputs: []
   };
-  LIST_UTIL.iterateSafely(formConfig.columns, function(column) {
-      var inputList = [];
-      LIST_UTIL.iterateSafely(column.inputs, function(inputId) {
-        var inputContent = contentLib.get({key: inputId});
-        if (inputContent !== null) {
-          var input = {};
-          inputContent.data.name = formatName(inputContent.data.name);
-          addCommonInputValues(input, inputContent.data);
-          addCustomInputValues(input, inputContent.type, inputContent.data);
-          input.class = (input.class) ? input.class + " xp-input" : "xp-input";
-          input.class.trim();
-          inputList.push(input);
-          if (getInputType(inputContent.type) === "file") form.enctype = "multipart/form-data";
-        } else {
-          log.error("Could not retrieve input element with ID '" + inputId + "'.");
-        }
-      });
-      form.columns.push({inputs: inputList});
+  LIST_UTIL.iterateSafely(formConfig.inputs, function(inputId) {
+    var inputContent = contentLib.get({key: inputId});
+    if (inputContent !== null) {
+      var input = {};
+      var inputName = inputContent.data.name || inputContent._name;
+      inputContent.data.id = formatName(inputName);
+      inputContent.data.name = formatName(inputName);
+      addCommonInputValues(input, inputContent.data);
+      addCustomInputValues(input, inputContent.type, inputContent.data);
+      input.class = (input.class) ? input.class + " xp-input" : "xp-input";
+      input.class.trim();
+      form.inputs.push(input);
+      if (getInputType(inputContent.type) === "file") form.enctype = "multipart/form-data";
+    } else {
+      log.error("Could not retrieve input element with ID '" + inputId + "'.");
+    }
   });
   return form;
 };
@@ -226,7 +225,7 @@ var initButtonInput = function(input, inputContent) {
 /* Checkbox input */
 var initCheckboxInput = function(input, inputContent) {
   if (inputContent.state === "checked") {
-    input.checked = (input.class) ? "checked" : input.class + " checked";
+    input.checked = (input.class) ? input.class + " checked" : "checked";
   } else if (inputContent.state === "indeterminate") {
     input.class = (input.class) ? input.class + " indeterminate" : "indeterminate";
   }
@@ -237,10 +236,10 @@ var initCheckboxInput = function(input, inputContent) {
 /* Color input */
 var initColorInput = function(input, inputContent) {
   input.title = inputContent.title || null;
-  var colorOptions = LIST_UTIL.asList(inputContent.datalist.datalistOptions);
-  input.placeholder = colorOptions[0].optionValue || "#000000";
-  input.value = colorOptions[0].optionValue || "#000000";
-  addDatalist(input, inputContent);
+  var colorOptions = LIST_UTIL.asList(inputContent.colorList.hexValues);
+  input.placeholder = colorOptions[0] || "#000000";
+  input.value = colorOptions[0] || "#000000";
+  addColorInputsAsDatalist(input, inputContent);
 };
 
 /* Date input */
@@ -359,7 +358,7 @@ var initResetInput = function(input, inputContent) {
 var initSearchInput = function(input, inputContent) {
   input.placeholder = inputContent.placeholder || null;
   input.pattern = inputContent.pattern || null;
-  addDatalist(input, inputContent);
+  addSearchTermsAsDatalist(input, inputContent);
 };
 
 /* Submit input */
@@ -389,17 +388,33 @@ var initUrlInput = function(input, inputContent) {
   input.pattern = input.pattern || null;
 };
 
-var addDatalist = function(input, inputContent) {
-  if (inputContent.datalist !== undefined) {
-    var options = inputContent.datalist.datalistOptions;
+var addColorInputsAsDatalist = function(input, inputContent) {
+  if (inputContent.colorList !== undefined) {
+    var colorList = inputContent.colorList;
+    input.datalist = {
+      id: (inputContent.id ? inputContent.id : inputContent.name) + "-datalist",
+      options: []
+    }
+    for (var i = 0; i < colorList.length; i++) {
+      input.datalist.options[i] = {
+        label: colorList[i],
+        value: colorList[i]
+      }
+    }
+  }
+}
+
+var addSearchTermsAsDatalist = function(input, inputContent) {
+  if (inputContent.searchTerms !== undefined) {
+    var options = inputContent.searchTerms;
     input.datalist = {
       id: (inputContent.id ? inputContent.id : inputContent.name) + "-datalist",
       options: []
     }
     for (var i = 0; i < options.length; i++) {
       input.datalist.options[i] = {
-        label: options[i].optionLabel,
-        value: options[i].optionValue
+        label: options[i],
+        value: options[i]
       }
     }
   }
@@ -415,7 +430,7 @@ var formatDate = function(date) {
 };
 
 var formatName = function(name) {
-  return name.replace('-', '_');
+  return name.replace(' ', '_').replace('-', '_');
 };
 
 var supportsCapture = function(accept) {

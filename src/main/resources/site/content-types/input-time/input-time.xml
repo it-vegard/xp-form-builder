@@ -1,13 +1,27 @@
 <content-type>
-  <display-name>Input: Time</display-name>
+  <display-name>Form input - Time</display-name>
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>
+    <field-set name="basic-settings">
+      <label>Basic settings</label>
+      <items>
+        <inline mixin="attr-label"/>
+        <inline mixin="attr-title"/>
+        <inline mixin="attr-required"/>
+      </items>
+    </field-set>
+    <field-set name="advanced-settings">
+      <label>Advanced settings</label>
+      <items>
+        <inline mixin="attr-name"/>
+        <inline mixin="attr-class"/>
+        <inline mixin="attr-value-time"/>
+      </items>
+    </field-set>
     <field-set name="input">
       <label>Input</label>
       <items>
-        <inline mixin="input-mixin"/>
-        <inline mixin="attr-value-time"/>
       </items>
     </field-set>
   </form>

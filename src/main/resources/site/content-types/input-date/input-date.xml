@@ -1,15 +1,24 @@
 <content-type>
-  <display-name>Input: Date</display-name>
+  <display-name>Form input - Date</display-name>
   <content-display-name-script>$('label')</content-display-name-script>
   <super-type>base:structured</super-type>
   <form>
-    <field-set name="input">
-      <label>Input</label>
+    <field-set name="basic-settings">
+      <label>Basic settings</label>
       <items>
-        <inline mixin="input-mixin"/>
-        <inline mixin="attr-value-date"/>
+        <inline mixin="attr-label"/>
+        <inline mixin="attr-title"/>
         <inline mixin="attr-min-date"/>
         <inline mixin="attr-max-date"/>
+        <inline mixin="attr-required"/>
+      </items>
+    </field-set>
+    <field-set name="advanced-settings">
+      <label>Advanced settings</label>
+      <items>
+        <inline mixin="attr-name"/>
+        <inline mixin="attr-class"/>
+        <inline mixin="attr-value-date"/>
       </items>
     </field-set>
   </form>

@@ -5,6 +5,7 @@
       <label>Minimum date</label>
       <occurrences minimum="0" maximum="1"/>
       <config/>
+      <help-text>[Optional] Limit what the minimum date set can be.</help-text>
     </input>
   </items>
 </mixin>

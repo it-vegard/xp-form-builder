@@ -46,6 +46,13 @@ exports.get = function(req) {
     // Get the component data to check if a form has been added to the part.
     // This enables the use of this part in other templates than the form template, as well as fragments
     var content = getFormContent();
+    if (!content || !content.data || !content.data.id) {
+        return {
+            body: thymeleaf.render(resolve("/views/error/form-not-configured.html"), {})
+        };
+    } else {
+        log.info("Content: %s", content.data);
+    }
     content.data.id = content._name;
     var contentData = content.data;
 

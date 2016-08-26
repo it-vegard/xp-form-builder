@@ -17,13 +17,13 @@ NB! Though this project is licenced under the MIT licence, Enonic XP itself is l
 
 1. From the applications tab: Download the application from Enonic Market.
 2. From the content studio: Edit your site and add the application. Save.
-![How site config should look after app has been installed](/docs/images/install-application.png "Site config with app installed")
+![How site config should look after app has been installed](https://github.com/it-vegard/xp-form-builder/blob/master/docs/images/install-application.PNG "Site config with app installed")
 3. From site config: Edit config. Choose styling for the app. You can choose between Twitter Bootstrap, browser defaults (your CSS will have full control over styling) and an example styling.
-![App config before styling is chosen.](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Choose between Twitter bootstrap, browser default and an example styling.")
+![App config before styling is chosen.](https://github.com/it-vegard/xp-form-builder/blob/master/docs/images/configure-app.PNG "Choose between Twitter bootstrap, browser default and an example styling.")
 4. From the content studio: Create a page template. You can choose to base this on existing page templates, or choose the one supplied with this app.
 5. Set what content types to associate the template with. You can of course associate it with the form content type, which will create standalone form pages, or you can add the form part on a landing page or similar.
 6. From the template config: Add the form part. If you only associate the template with the form content type: Save and start making forms. If adding forms on other pages: You will have to edit the part configuration on the pages you want to show a form. In the part configuration you add the form you want to display. This also works if you make a fragment of the form, so the form is shown on any page you add the fragment.
-![The form part configuration](/docs/images/form-part-config.png "Configure the part on the pages you add it unless they are standalone form pages.")
+![The form part configuration](https://github.com/it-vegard/xp-form-builder/blob/master/docs/images/form-part-config.png "Configure the part on the pages you add it unless they are standalone form pages.")
 7. Create forms!
 
 ### My first form ###
@@ -34,7 +34,7 @@ All content types in the app are organized with 2-3 sections.
 * The advanced settings are not normally required, and it will usually be the IT department that will make changes here.
 
 1. From the content studio: Create a new form somewhere on a site where you added the application.
-![How the content tree of the site could look after adding a form](/docs/images/form-added-to-site.png "Form added to site")
+![How the content tree of the site could look after adding a form](https://github.com/it-vegard/xp-form-builder/blob/master/docs/images/form-added-to-site.png "Form added to site")
 2. You have many options on how to configure your form, but in many cases you can just leave the default settings in place. 
  1. The only part you need to do, is add input elements. (We will get back to that in the next item) You can also add a heading (H2-level heading) above the form, though this is optional. 
  2. The next entries relate to how and where to submit the form. Although there are default settings, you most likely want to have a look at these.

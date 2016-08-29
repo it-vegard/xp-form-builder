@@ -58,7 +58,7 @@ exports.receiveForm = function(request, formConfig) {
 };
 
 var saveForm = function(form, formConfig) {
-  var responseFolder = getResponseFolder(formConfig);
+  var responseFolder = getResponseFolder(formConfig, form);
   var timestamp = moment().format('YYYY-MM-DDTHH:mm:ss');
   var name = timestamp + "-" + auth.getUser().login;
   var displayName = timestamp + ": " + auth.getUser().login;
@@ -78,7 +78,7 @@ var saveForm = function(form, formConfig) {
 };
 
 var saveAttachments = function(form, formConfig) {
-  var responseFolder = getResponseFolder(formConfig);
+  var responseFolder = getResponseFolder(formConfig, form);
   var attachmentsFolder = getAttachmentFolderOrCreateNew(responseFolder);
   var files = getFilesFromForm(form);
   var savedFiles = [];
@@ -142,9 +142,9 @@ var saveFile = function(file, folder) {
   };
 };
 
-var getResponseFolder = function(formConfig) {
+var getResponseFolder = function(formConfig, form) {
   try {
-    var responseFolderKey = formConfig["responseFolder"];
+    var responseFolderKey = formConfig["responseFolder"] || portal.getContent()._id;
     var responseFolder = contentLib.get({key: responseFolderKey});
     return responseFolder._path;
   } catch (exception) {

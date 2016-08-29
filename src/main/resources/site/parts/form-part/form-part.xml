@@ -1,5 +1,5 @@
 <part>
-  <display-name>Form</display-name>
+  <display-name>Form view</display-name>
   <config>
     <field-set name="form">
       <label>Form</label>

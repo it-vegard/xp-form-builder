@@ -38,14 +38,14 @@ All content types in the app are organized with 2-3 sections.
 2. You have many options on how to configure your form, but in many cases you can just leave the default settings in place. 
  1. The only part you need to do, is add input elements. (We will get back to that in the next item) You can also add a heading (H2-level heading) above the form, though this is optional. 
  2. The next entries relate to how and where to submit the form. Although there are default settings, you most likely want to have a look at these.
-  1. If the form data should be submitted to a third-party application, you need to set the URL.
-  2. If submitting to Enonic, you can choose to add a folder to store the responses in. By default, the data is stored as child content under the form.
-  3. You may want to add a response message. This will be displayed below the form after it is submitted.
-  4. If you want to customize the text on the submit button, feel free.
+  1. If submitting to Enonic, you can choose to add a folder to store the responses in. By default, the data is stored as child content under the form.
+  2. You may want to add a response message. This will be displayed below the form after it is submitted.
+  3. If you want to customize the text on the submit button, feel free.
  3. The next settings are all advanced features, and you should check with the IT department before changing these.
-  1. Submit method: Defaults to POST, but choose GET where you want the form data added to the URL, like for search forms, etc.
-  2. Ajax submit: Disable if the user should be sent to the URL specified above. Defaults to submitting and staying on the same page. The response message will be shown below the form to confirm that it has been submitted.
-  3. Style: Override the styling chosen for the site.
+  1. If the form data should be submitted to a third-party application, you need to set the URL.
+  2. Submit method: Defaults to POST, but choose GET where you want the form data added to the URL, like for search forms, etc.
+  3. Ajax submit: Disable if the user should be sent to the URL specified above. Defaults to submitting and staying on the same page. The response message will be shown below the form to confirm that it has been submitted.
+  4. Style: Override the styling chosen for the site.
 3. Since you do not have any input elements right now, save and go back to the content studio.
 4. You can now create input elements. Although they can be created anywhere on the site, the recommendation is to place them either as children to the form or in a central folder to re-use in different forms.
  1. There are a lot of different input types to choose from. They are not documented here, but all configuration options have help-texts (Available from Enonic XP 6.7).

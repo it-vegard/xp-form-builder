@@ -57,6 +57,15 @@ All content types in the app are organized with 2-3 sections.
 
 ![Example of how you may set up the form responses, input elements and forms in the content studio. Example of a form to the right.](https://github.com/it-vegard/xp-form-builder/blob/master/docs/images/example-overview.PNG "Example of how the content studio may look with forms added.")
 
+### Displaying responses ###
+
+If you want an easy way to view the responses, a special page template is added for this purpose. These are the quick instructions on how to use this:
+
+1. Create a new template in the content studio and select the page template called "Form response".
+2. Set "Unstructured" as supported content types.
+3. View your response by selecting it in the content studio. (No need to open the content!)
+4. Now you can easily navigate between the responses by moving up and down in the site structure.
+
 ## Development instructions ##
 
 ### Prerequisites ###

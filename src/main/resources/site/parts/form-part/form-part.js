@@ -46,9 +46,13 @@ exports.get = function(req) {
     // Get the component data to check if a form has been added to the part.
     // This enables the use of this part in other templates than the form template, as well as fragments
     var content = getFormContent();
-    if (!content || !content.data || !content.data.id) {
+    if (!content || content.type !== 'no.vegard.it.xp.formbuilder:form') {
         return {
-            body: thymeleaf.render(resolve("/views/error/form-not-configured.html"), {})
+            body: thymeleaf.render(resolve("/views/error/form-not-found.html"), {})
+        };
+    } else if (!content.data.inputs) {
+        return {
+            body: thymeleaf.render(resolve("/views/error/form-missing-inputs.html"), {})
         };
     }
     

@@ -53,7 +53,9 @@ All content types in the app are organized with 2-3 sections.
  3. The same rules as specified at the top of the section applies: You will almost always need to fill out the basic settings, some input types have a middle section that should be filled out, and the advanced settings should only be changed if you are sure of what the change will do.
 5. After creating the input elements you need, edit the form and add them.
  1. You can sort the input elements as you want to.
-6. That's it! Watch the responses pouring in...
+6. That's it! Watch the responses pouring in
+
+![Example of how you may set up the form responses, input elements and forms in the content studio. Example of a form to the right.](https://github.com/it-vegard/xp-form-builder/blob/master/docs/images/example-overview.PNG "Example of how the content studio may look with forms added.")
 
 ## Development instructions ##
 

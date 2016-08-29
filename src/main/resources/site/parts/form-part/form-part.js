@@ -50,9 +50,8 @@ exports.get = function(req) {
         return {
             body: thymeleaf.render(resolve("/views/error/form-not-configured.html"), {})
         };
-    } else {
-        log.info("Content: %s", content.data);
     }
+    
     content.data.id = content._name;
     var contentData = content.data;
 

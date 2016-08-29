@@ -35,8 +35,8 @@ var XP_FORM_BUILDER = {
   },
   addSubmitHandling: function(form) {
     var forms = document.getElementsByClassName("xp-formbuilder-form");
-    for (let i = 0; i < forms.length; i++) {
-      let currentForm = forms[i];
+    for (var i = 0; i < forms.length; i++) {
+      var currentForm = forms[i];
       if (currentForm.className.indexOf("ajax-submit") > -1) {
       currentForm.onsubmit = XP_FORM_BUILDER.submitForm;
       }
@@ -44,21 +44,21 @@ var XP_FORM_BUILDER = {
   },
   submitForm: function(event) {
     event.preventDefault();
-    let inputFields = this.getElementsByTagName("input");
-    let formData = XP_FORM_BUILDER.prepareFormData(inputFields);
+    var inputFields = this.getElementsByTagName("input");
+    var formData = XP_FORM_BUILDER.prepareFormData(inputFields);
     XP_FORM_BUILDER.disable(this);
     XP_FORM_BUILDER.sendForm(event.target, formData);
   },
   disable: function(form) {
-    let inputElements = form.getElementsByClassName("xp-input");
+    var inputElements = form.getElementsByClassName("xp-input");
     for (var i = 0; i < inputElements.length; i++) inputElements[i].disabled = true;
     form.getElementsByClassName("xp-submit")[0].disabled = true;
     form.className = (form.className) ? form.className + " xp-submitting" : "xp-submitting";
   },
   prepareFormData: function(inputFields) {
-    let formData = new FormData();
-    for (let i = 0; i < inputFields.length; i++) {
-      let inputField = inputFields[i];
+    var formData = new FormData();
+    for (var i = 0; i < inputFields.length; i++) {
+      var inputField = inputFields[i];
       if (inputField.type === "file") {
         XP_FORM_BUILDER.addFiles(inputField, formData);
       } else 
@@ -75,20 +75,25 @@ var XP_FORM_BUILDER = {
     return formData;
   },
   addFiles: function(inputField, formData) {
-    for (let i = 0; i < inputField.files.length; i++) {
-      let file = inputField.files[i];
+    for (var i = 0; i < inputField.files.length; i++) {
+      var file = inputField.files[i];
       if (XP_FORM_BUILDER.validateFile(file)) {
         formData.append(inputField.id + "[" + i + "]", file, file.name);
       }
     }
   },
   sendForm: function(form, formData) {
-    let xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open('POST', form.action, true);
     xhr.onload = function(response) {
       if (xhr.status === 200) {
-        XP_FORM_BUILDER.addResponse(form, response.srcElement.responseText);
-        form.remove();
+        var target = response.srcElement || response.target;
+        XP_FORM_BUILDER.addResponse(form, target.responseText);
+        if (form.remove) {
+          form.remove();
+        } else {
+          form.parentElement.removeChild(form); //IE fallback
+        }
       } else {
         console.log("Error: Failed submitting form.");
       }
@@ -99,7 +104,7 @@ var XP_FORM_BUILDER = {
     return true;
   },
   addResponse: function(form, message) {
-    let responseTag = document.createElement("p");
+    var responseTag = document.createElement("p");
     responseTag.className = "xp-form-response";
     responseTag.innerHTML = message;
     form.parentElement.insertBefore(responseTag, form);

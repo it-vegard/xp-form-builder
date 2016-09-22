@@ -159,7 +159,10 @@ var addCommonInputValues = function(input, inputContent) {
   input.title = inputContent.title;
   input.help = inputContent.help;
   input.class = inputContent.class;
-  input.required = inputContent.required || false;
+  if (inputContent.required) {
+    input.labelClass = "required";
+    input.required = inputContent.required;
+  }
 };
 
 var addCustomInputValues = function(input, inputType, inputContent) {

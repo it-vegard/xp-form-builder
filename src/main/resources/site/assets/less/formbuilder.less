@@ -8,7 +8,7 @@
 @textColor: @charcoal;
 @foregroundColor: @white;
 @inputBackgroundColor: darken(@foregroundColor, 3%);
-@borderColor: darken(@inputBackgroundColor, 10%);
+@borderColor: darken(@inputBackgroundColor, 20%);
 @shadowColor: @darkGrey;
 @buttonColor: @inputBackgroundColor;
 
@@ -51,11 +51,72 @@ form.xp-formbuilder-form {
     }
 
     &:hover {
-      input, input[type="checkbox"] + .checkmark {
+      input, &.checkbox-label {
         border-color: darken(@borderColor, 10%);
         background-color: darken(@buttonColor, 5%);
       }
-      
+    }
+
+    &.checkbox-label {
+      display: block;
+      position: relative;
+      width: calc(100% - 17px);
+      /*width: @inputSize;*/
+      height: @inputSize;
+      line-height: @inputSize;
+      font-size: 16px;
+      border: @borderWidth solid @borderColor;
+      border-radius: @defaultBorderRadius;
+      background-color: @buttonColor;
+      color: transparent;
+      padding-left: 15px;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      .checkbox-text {
+        font-size: @inputFontSize;
+        font-family: @inputFontFamily;
+        font-weight: normal;
+        color: @textColor;
+        left: 70px;
+        vertical-align: top;
+      }
+
+      .checkmark {
+        padding: 1px 3px;
+        margin-right: 5px;
+        border: @borderWidth solid darken(@borderColor, 10%);
+        border-radius: @defaultBorderRadius;
+      }
+
+      input[type="checkbox"] {
+        border: 0;
+        background-color: transparent;
+        width: 0;
+        height: 0;
+        margin: 0;
+
+
+        &:checked + .checkmark {
+          color: @textColor;
+        }
+
+        &:indeterminate + .checkmark {
+          font-size: 0;
+
+          &:before {
+            content: "-";
+            color: @textColor;
+            font-size: @inputSize;
+            line-height: (@inputSize - 6px);
+            display: inline-block;
+            width: 24px;
+          }
+        }
+      }
     }
   }
 
@@ -97,55 +158,6 @@ form.xp-formbuilder-form {
       display: inline-block;
       margin-right: @radioButtonMarginRight;
       width: initial;
-    }
-
-    &[type="checkbox"] {
-      display: none;
-
-      + .checkmark {
-        display: block;
-        position: relative;
-        /*width: @inputSize;*/
-        height: @inputSize;
-        line-height: @inputSize;
-        font-size: 29px;
-        border: @borderWidth solid @borderColor;
-        border-radius: (2 * @defaultBorderRadius);
-        background-color: @buttonColor;
-        color: transparent;
-        padding-left: 15px;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-
-        .checkbox-text {
-          font-size: @inputFontSize;
-          font-family: @inputFontFamily;
-          font-weight: normal;
-          color: @textColor;
-          left: 70px;
-          vertical-align: top;
-        }
-      }
-
-      &:checked + .checkmark {
-        color: @textColor;
-      }
-
-      &:indeterminate + .checkmark {
-        font-size: 0;
-
-        &:before {
-          content: "-";
-          color: @textColor;
-          font-size: @inputSize;
-          line-height: (@inputSize - 6px);
-          display: inline-block;
-          width: 24px;
-        }
-      }
     }
 
     &[type="search"] {

@@ -16,7 +16,7 @@
     <field-set name="limits-settings">
       <label>Slider settings</label>
       <items>
-        <inline mixin="attr-value"/>
+        <inline mixin="attr-value-double"/>
         <inline mixin="attr-step"/>
         <inline mixin="attr-ticks"/>
       </items>

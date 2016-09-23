@@ -338,7 +338,7 @@ var initRangeInput = function(input, inputContent) {
         value: ticks[i]
       };
     };
-  } else if (inputContent.min && inputContent.max && inputContent.step) { // Fall back to generate datalist based on max, min and step
+  } else if (inputContent.min !== undefined && inputContent.max !== undefined && inputContent.step !== undefined) { // Fall back to generate datalist based on max, min and step
     input.datalist = {
       id: input.id + "-datalist",
       options: []
@@ -346,7 +346,8 @@ var initRangeInput = function(input, inputContent) {
     for (var i = inputContent.min; i <= inputContent.max; i = i + inputContent.step) {
       input.datalist.options.push({
         label: i,
-        value: i
+        value: i,
+        selected: i === inputContent.value ? true : undefined
       });
     }
   }

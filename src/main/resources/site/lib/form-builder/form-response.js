@@ -9,33 +9,32 @@ function FormResponse(request, formConfig) {
     return new FormResponse(request, formConfig);
   }
 
-  this.request = request;
+  this.formData = request.params;
   this.formConfig = formConfig;
 };
 
 FormResponse.prototype.save = function() {
-  return receiveForm(this.request, this.formConfig);
+  return receiveForm(this.formData, this.formConfig);
 };
 
 /*** Private functions for the inner workings of the class ***/
 
-var receiveForm = function(request, formConfig) {
-  var form = request.params;
-  form.displayName = formConfig.title || "form-response";
+var receiveForm = function(formData, formConfig) {
+  formData.displayName = formConfig.title || "form-response";
   var attachments = [];
   var multiPartForm = portal.getMultipartForm();
   if (multiPartForm) {
     attachments = saveAttachments(multiPartForm, formConfig);
     for (var i = 0; i < attachments.length; i++) {
       var attachment = attachments[i];
-      if (!form[attachment.inputId]) form[attachment.inputId] = { attachments: [] }; 
-      form[attachment.inputId].attachments.push({
+      if (!formData[attachment.inputId]) formData[attachment.inputId] = { attachments: [] }; 
+      formData[attachment.inputId].attachments.push({
         id: attachment.id,
         name: attachment.name
       });
     }
   }
-  var response = saveForm(form, formConfig);
+  var response = saveForm(formData, formConfig);
   return {
     body: formConfig.response
   };

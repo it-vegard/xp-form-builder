@@ -5,6 +5,7 @@ var contentLib = require('/lib/xp/content'); // Import the content library
 var moment = require('/lib/moment.min.js'); // Import Moment.js
 
 var FORM_BUILDER = require('/lib/form-builder/formbuilder-util');
+var FormResponse = require('/lib/form-builder/form-response');
 
 var styleConfig = {
     bootstrap: {
@@ -89,5 +90,5 @@ exports.get = function(req) {
 
 exports.post = function(req) {
     var formConfig = getFormContent().data;
-    return FORM_BUILDER.receiveForm(req, formConfig);
+    return FormResponse.receiveForm(req, formConfig);
 };

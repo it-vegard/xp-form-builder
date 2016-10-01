@@ -1,9 +1,7 @@
 var portal = require('/lib/xp/portal'); // Import the portal functions
 var contentLib = require('/lib/xp/content'); // Import the portal functions
-var auth = require('/lib/xp/auth'); // Import the content library
 
 var LIST_UTIL = require('/lib/form-builder/list-util');
-var moment = require('/lib/moment.min.js'); // Import Moment.js
 
 exports.initForm = function (formConfig) {
   var form = {
@@ -33,123 +31,6 @@ exports.initForm = function (formConfig) {
     }
   });
   return form;
-};
-
-exports.receiveForm = function(request, formConfig) {
-  var form = request.params;
-  form.displayName = formConfig.title || "form-response";
-  var attachments = [];
-  var multiPartForm = portal.getMultipartForm();
-  if (multiPartForm) {
-    attachments = saveAttachments(multiPartForm, formConfig);
-    for (var i = 0; i < attachments.length; i++) {
-      var attachment = attachments[i];
-      if (!form[attachment.inputId]) form[attachment.inputId] = { attachments: [] }; 
-      form[attachment.inputId].attachments.push({
-        id: attachment.id,
-        name: attachment.name
-      });
-    }
-  }
-  var response = saveForm(form, formConfig);
-  return {
-    body: formConfig.response
-  };
-};
-
-var saveForm = function(form, formConfig) {
-  var responseFolder = getResponseFolder(formConfig, form);
-  var timestamp = moment().format('YYYY-MM-DDTHH:mm:ss');
-  var name = timestamp + "-" + auth.getUser().login;
-  var displayName = timestamp + ": " + auth.getUser().login;
-  var response = contentLib.create({
-      name: name,
-      parentPath: responseFolder,
-      displayName: form.displayName,
-      requireValid: true,
-      contentType: 'base:unstructured',
-      branch: 'draft',
-      data: form
-  });
-  log.info("Stored form response. Response key: %s", response._id);
-  return {
-      body: response
-  };
-};
-
-var saveAttachments = function(form, formConfig) {
-  var responseFolder = getResponseFolder(formConfig, form);
-  var attachmentsFolder = getAttachmentFolderOrCreateNew(responseFolder);
-  var files = getFilesFromForm(form);
-  var savedFiles = [];
-  for (var index = 0; index < files.length; index++) {
-    var savedFile = saveFile(files[index], attachmentsFolder);
-    savedFiles.push(savedFile);
-  }
-  return savedFiles;
-};
-
-var getAttachmentFolderOrCreateNew = function(parentFolder) {
-  try {
-    var attachmentsFolder = contentLib.create({
-      name: '_attachments',
-      parentPath: parentFolder,
-      displayName: '_attachments',
-      draft: true,
-      contentType: 'base:folder',
-      data: {}
-    });
-    return attachmentsFolder._path;
-  } catch (exception) {
-    if (exception.code === 'contentAlreadyExists') {
-      return parentFolder + "/_attachments";
-    }  else {
-      log.info("Unexpected error when creating attachments-folder in path '%s': %s", parentFolder, exception);
-      return parentFolder;
-    }
-  }
-};
-
-var getFilesFromForm = function(form) {
-  var files = [];
-  for (var inputName in form) {
-    var input = form[inputName];
-    if (inputIsFile(input)) {
-      files.push(input);
-    }
-  }
-  return files;
-};
-
-var inputIsFile = function(input) {
-  return (input["fileName"] !== undefined && input["contentType"] !== undefined);
-};
-
-var saveFile = function(file, folder) {
-  var stream = portal.getMultipartStream(file.name);
-  var result = contentLib.createMedia({
-    name: file.fileName,
-    parentPath: folder,
-    mimeType: file.contentType,
-    data: stream
-  });
-  return {
-    id: result._id,
-    inputId: file.name.split("[")[0],
-    name: result._name,
-    displayName: result.displayName,
-    type: result.type
-  };
-};
-
-var getResponseFolder = function(formConfig, form) {
-  try {
-    var responseFolderKey = formConfig["responseFolder"] || portal.getContent()._id;
-    var responseFolder = contentLib.get({key: responseFolderKey});
-    return responseFolder._path;
-  } catch (exception) {
-    log.error("Could not resolve folder to store form responses in.", exception);
-  }
 };
 
 var addCommonInputValues = function(input, inputContent) {

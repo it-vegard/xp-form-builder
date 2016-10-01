@@ -51,7 +51,7 @@ form.xp-formbuilder-form {
     }
 
     &:hover {
-      input, &.checkbox-label {
+      input:not(:focus), &.checkbox-label {
         border-color: darken(@borderColor, 10%);
         background-color: darken(@buttonColor, 5%);
       }
@@ -61,7 +61,6 @@ form.xp-formbuilder-form {
       display: block;
       position: relative;
       width: calc(100% - 17px);
-      /*width: @inputSize;*/
       height: @inputSize;
       line-height: @inputSize;
       font-size: 16px;
@@ -75,6 +74,10 @@ form.xp-formbuilder-form {
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+
+      &:has(input[type="checkbox"]:focus) {
+        background-color: @white;
+      }
 
       .checkbox-text {
         font-size: @inputFontSize;
@@ -116,6 +119,12 @@ form.xp-formbuilder-form {
             width: 24px;
           }
         }
+
+        &:focus {
+          & + .checkmark {
+            background-color: @white;
+          }
+        }
       }
     }
   }
@@ -144,7 +153,7 @@ form.xp-formbuilder-form {
     font-family: @inputFontFamily;
 
     &:focus {
-      outline: none;
+      background-color: @white;
     }
 
     &::-webkit-input-placeholder,
@@ -185,7 +194,7 @@ form.xp-formbuilder-form {
         width: @sliderButtonDiameter;
         height: @sliderButtonDiameter;
         border-radius: (@sliderButtonDiameter / 2);
-        background: @foregroundColor;
+        background: @borderColor;
         cursor: pointer;
         margin-top: (-(@inputPaddingVertical - @borderWidth));
         box-shadow: 1px 1px 1px @shadowColor, 0px 0px 1px @shadowColor;
@@ -201,7 +210,10 @@ form.xp-formbuilder-form {
       }
 
       &:focus {
-        outline: none;
+        &::-webkit-slider-thumb {
+          box-shadow: 1px 1px 3px @shadowColor, 0px 0px 3px blue;
+          background: @foregroundColor;
+        }
       }
 
       &:active {

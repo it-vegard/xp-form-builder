@@ -10,6 +10,7 @@ function FormResponse(request, formConfig) {
   }
 
   this.formData = request.params;
+  this.formData.displayName = formConfig.title || "form-response";
   this.formConfig = formConfig;
 };
 
@@ -20,7 +21,6 @@ FormResponse.prototype.save = function() {
 /*** Private functions for the inner workings of the class ***/
 
 var receiveForm = function(formData, formConfig) {
-  formData.displayName = formConfig.title || "form-response";
   var attachments = [];
   var multiPartForm = portal.getMultipartForm();
   if (multiPartForm) {
@@ -35,9 +35,7 @@ var receiveForm = function(formData, formConfig) {
     }
   }
   var response = saveForm(formData, formConfig);
-  return {
-    body: formConfig.response
-  };
+  return formConfig.response;
 };
 
 var saveForm = function(form, formConfig) {

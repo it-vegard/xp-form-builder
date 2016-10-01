@@ -12,19 +12,20 @@ function FormResponse(request, formConfig) {
   this.formData = request.params;
   this.formData.displayName = formConfig.title || "form-response";
   this.formConfig = formConfig;
+  this.responseFolder = getResponseFolder(this.formConfig);
 };
 
 FormResponse.prototype.save = function() {
-  return receiveForm(this.formData, this.formConfig);
+  return receiveForm(this.formData, this.formConfig, this.responseFolder);
 };
 
 /*** Private functions for the inner workings of the class ***/
 
-var receiveForm = function(formData, formConfig) {
+var receiveForm = function(formData, formConfig, responseFolder) {
   var attachments = [];
   var multiPartForm = portal.getMultipartForm();
   if (multiPartForm) {
-    attachments = saveAttachments(multiPartForm, formConfig);
+    attachments = saveAttachments(multiPartForm, responseFolder);
     for (var i = 0; i < attachments.length; i++) {
       var attachment = attachments[i];
       if (!formData[attachment.inputId]) formData[attachment.inputId] = { attachments: [] }; 
@@ -34,15 +35,13 @@ var receiveForm = function(formData, formConfig) {
       });
     }
   }
-  var response = saveForm(formData, formConfig);
+  var response = saveForm(formData, responseFolder);
   return formConfig.response;
 };
 
-var saveForm = function(form, formConfig) {
-  var responseFolder = getResponseFolder(formConfig, form);
+var saveForm = function(form, responseFolder) {
   var timestamp = moment().format('YYYY-MM-DDTHH:mm:ss');
   var name = timestamp + "-" + auth.getUser().login; //TODO: Fix dependency to logged-in user
-  var displayName = timestamp + ": " + auth.getUser().login;
   var response = contentLib.create({
       name: name,
       parentPath: responseFolder,
@@ -58,8 +57,7 @@ var saveForm = function(form, formConfig) {
   };
 };
 
-var saveAttachments = function(form, formConfig) {
-  var responseFolder = getResponseFolder(formConfig, form);
+var saveAttachments = function(form, responseFolder) {
   var attachmentsFolder = getAttachmentFolderOrCreateNew(responseFolder);
   var files = getFilesFromForm(form);
   var savedFiles = [];
@@ -70,11 +68,11 @@ var saveAttachments = function(form, formConfig) {
   return savedFiles;
 };
 
-var getResponseFolder = function(formConfig, form) {
+var getResponseFolder = function(formConfig) {
   try {
-    var responseFolderKey = formConfig["responseFolder"] || portal.getContent()._id;
-    var responseFolder = contentLib.get({key: responseFolderKey});
-    return responseFolder._path;
+    return formConfig["responseFolder"] ? 
+      contentLib.get({key: formConfig["responseFolder"]})._path : 
+      portal.getContent()._path;
   } catch (exception) {
     log.error("Could not resolve folder to store form responses in.", exception);
   }

@@ -31,7 +31,8 @@ var receiveForm = function(formData, formConfig, responseFolder) {
       if (!formData[attachment.inputId]) formData[attachment.inputId] = { attachments: [] }; 
       formData[attachment.inputId].attachments.push({
         id: attachment.id,
-        name: attachment.name
+        name: attachment.name,
+        url: portal.attachmentUrl({ id: attachment.id, download: true }) || ""
       });
     }
   }

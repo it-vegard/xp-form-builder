@@ -16,10 +16,11 @@ exports.get = function(req) {
         fields: []
     };
     for (var field in content.data) {
+        var attachments = (content.data[field].attachments instanceof Array) ? content.data[field].attachments : [content.data[field].attachments]; 
         formResponse.fields.push({
             name: field,
             value: content.data[field],
-            attachments: content.data[field].attachments
+            attachments: attachments
         });
     }
     formResponse.displayName = content.displayName;

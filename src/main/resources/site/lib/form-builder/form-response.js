@@ -4,19 +4,11 @@ var auth = require('/lib/xp/auth'); // Import the content library
 
 var moment = require('/lib/moment.min.js'); // Import Moment.js
 
-function FormResponse(request, formConfig) {
-  if (!(this instanceof FormResponse)) {
-    return new FormResponse(request, formConfig);
-  }
-
-  this.formData = request.params;
-  this.formData.displayName = formConfig.title || "form-response";
-  this.formConfig = formConfig;
-  this.responseFolder = getResponseFolder(this.formConfig);
-};
-
-FormResponse.prototype.save = function() {
-  return receiveForm(this.formData, this.formConfig, this.responseFolder);
+exports.save = function(request, formConfig) {
+  var formData = request.params;
+  formData.displayName = formConfig.title || "form-response";
+  var responseFolder = getResponseFolder(formConfig);
+  return receiveForm(formData, formConfig, responseFolder);
 };
 
 /*** Private functions for the inner workings of the class ***/
@@ -131,5 +123,3 @@ var saveFile = function(file, folder) {
     type: result.type
   };
 };
-
-exports = FormResponse;

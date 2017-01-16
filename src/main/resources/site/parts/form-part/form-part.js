@@ -90,7 +90,7 @@ exports.get = function(req) {
 
 exports.post = function(req) {
     var formConfig = getFormContent().data;
-    var response = FormResponse(req, formConfig).save();
+    var response = FormResponse.save(req, formConfig);
     return {
         body: response
     };

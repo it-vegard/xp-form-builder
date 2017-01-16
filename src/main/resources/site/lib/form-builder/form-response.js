@@ -1,6 +1,5 @@
 var portal = require('/lib/xp/portal'); // Import the portal functions
 var contentLib = require('/lib/xp/content'); // Import the portal functions
-var auth = require('/lib/xp/auth'); // Import the content library
 
 var moment = require('/lib/moment.min.js'); // Import Moment.js
 
@@ -34,7 +33,8 @@ var receiveForm = function(formData, formConfig, responseFolder) {
 
 var saveForm = function(form, responseFolder) {
   var timestamp = moment().format('YYYY-MM-DDTHH:mm:ss');
-  var name = timestamp + "-" + auth.getUser().login; //TODO: Fix dependency to logged-in user
+  var base64encodedForm = new Buffer(form).toString('base64');
+  var name = "".concat("[", timestamp, "] ", base64encodedForm);
   var response = contentLib.create({
       name: name,
       parentPath: responseFolder,

@@ -33,12 +33,10 @@ var receiveForm = function(formData, formConfig, responseFolder) {
 
 var saveForm = function(form, responseFolder) {
   var timestamp = moment().format('YYYY-MM-DDTHH:mm:ss');
-  var base64encodedForm = new Buffer(form).toString('base64');
-  var name = "".concat("[", timestamp, "] ", base64encodedForm);
+  var name = "".concat("[", timestamp, "] ", form.displayName);
   var response = contentLib.create({
-      name: name,
       parentPath: responseFolder,
-      displayName: form.displayName,
+      displayName: name,
       requireValid: true,
       contentType: 'base:unstructured',
       branch: 'draft',

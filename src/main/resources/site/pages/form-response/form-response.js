@@ -16,7 +16,7 @@ exports.get = function(req) {
         fields: []
     };
     for (var field in content.data) {
-        var attachments = (content.data[field].attachments instanceof Array) ? content.data[field].attachments : [content.data[field].attachments]; 
+        var attachments = (content.data[field].attachments instanceof Array || content.data[field].attachments === undefined) ? content.data[field].attachments : [content.data[field].attachments]; 
         formResponse.fields.push({
             name: field,
             value: content.data[field],

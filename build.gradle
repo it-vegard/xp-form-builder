@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.enonic.xp:gradle-plugin:6.3.0'
+        classpath 'com.enonic.xp:gradle-plugin:6.9.0'
         classpath 'com.github.houbie:lesscss-gradle-plugin:1.0.3-less-1.7.0'
     }
 }
@@ -36,7 +36,7 @@ lessc {
 }
 
 ext {
-    xpVersion = '6.3.0'
+    xpVersion = '6.9.0'
 }
 
 dependencies {

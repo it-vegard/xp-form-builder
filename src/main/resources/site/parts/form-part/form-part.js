@@ -4,7 +4,8 @@ var contentLib = require('/lib/xp/content'); // Import the content library
 
 var moment = require('/lib/moment.min.js'); // Import Moment.js
 
-var FORM_BUILDER = require('/lib/form-builder/formbuilder-util');
+var FormMapper = require('/lib/form-builder/mapper/form-mapper');
+var FormResponse = require('/lib/form-builder/form-response');
 
 var styleConfig = {
     bootstrap: {
@@ -60,7 +61,7 @@ exports.get = function(req) {
     var contentData = content.data;
 
     // Set up the form structure
-    var form = FORM_BUILDER.initForm(contentData);
+    var form = FormMapper.map(contentData);
 
     // Prepare the model object with the needed data extracted from the content
     var model = {
@@ -89,5 +90,8 @@ exports.get = function(req) {
 
 exports.post = function(req) {
     var formConfig = getFormContent().data;
-    return FORM_BUILDER.receiveForm(req, formConfig);
+    var response = FormResponse.save(req, formConfig);
+    return {
+        body: response
+    };
 };

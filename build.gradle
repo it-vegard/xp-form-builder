@@ -11,12 +11,14 @@ buildscript {
     dependencies {
         classpath 'com.enonic.xp:gradle-plugin:6.9.0'
         classpath 'com.github.houbie:lesscss-gradle-plugin:1.0.3-less-1.7.0'
+        classpath 'com.moowork.gradle:gradle-node-plugin:0.11'
     }
 }
 
 
 apply plugin: 'lesscss'
 apply plugin: 'com.enonic.xp.app'
+apply plugin: 'com.moowork.node'
 
 version = '1.2.2'
 
@@ -25,6 +27,11 @@ app {
     displayName = 'Enonic XP Form Builder'
     vendorName = 'Vegard Haugstvedt'
     vendorUrl = 'http://www.github.com/it-vegard'
+}
+
+node {
+    version = '5.0.0'
+    download = true
 }
 
 lessc {
@@ -37,6 +44,10 @@ lessc {
 
 ext {
     xpVersion = '6.9.0'
+}
+
+task webpack(type: NodeTask) {
+  script = project.file('node_modules/webpack/bin/webpack.js')
 }
 
 dependencies {
@@ -60,3 +71,4 @@ repositories {
 }
 
 jar.dependsOn += lessc
+jar.dependsOn += 'webpack'

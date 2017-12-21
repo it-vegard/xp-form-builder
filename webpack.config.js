@@ -12,7 +12,7 @@ module.exports = {
         'site/assets/js': path.join(__dirname, paths.formbuilder, 'jsx', 'main.jsx')
     },
     output: {
-        path: 'build/resources/main',
+        path: path.join(__dirname, 'build/resources/main'),
         filename: '[name]/bundle.js'
     },
     module: {
@@ -25,6 +25,9 @@ module.exports = {
                     presets: [ 
                         'es2015', 
                         'react'
+                    ],
+                    plugins: [
+                        require('babel-plugin-transform-object-rest-spread')
                     ]
                 }
             },
@@ -41,7 +44,10 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map',
+    node: {
+        fs: 'empty'
+    },
+    devtool: 'eval-cheap-module-source-map',
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             minimize: true,

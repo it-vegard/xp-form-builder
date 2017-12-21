@@ -1,0 +1,7 @@
+<tool>
+  <display-name>Form builder</display-name>
+  <description>Create and manage forms</description>
+  <allow>
+    <principal>role:system.admin</principal>
+  </allow>
+</tool>

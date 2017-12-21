@@ -1,7 +1,22 @@
 <page>
-  <display-name>Formbuilder test page</display-name>
-  <config/>
-  <regions>
-    <region name="main"/>
-  </regions>
+    <display-name>Formbuilder test page</display-name>
+    <config>
+        <item-set name="contact_info">
+          <label>Contact Info</label>
+          <items>
+            <input name="label" type="TextLine">
+              <label>Label</label>
+              <occurrences minimum="0" maximum="1"/>
+            </input>
+            <input name="phone_number" type="TextLine">
+                <label>Phone Number</label>
+                <occurrences minimum="0" maximum="1"/>
+            </input>
+          </items>
+          <occurrences minimum="0" maximum="0"/>
+        </item-set>
+    </config>
+    <regions>
+        <region name="main"/>
+    </regions>
 </page>
